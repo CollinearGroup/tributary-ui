@@ -1,0 +1,29 @@
+.sidebar-container{
+  min-width:360px;
+  background-color:white;
+  height:100%;
+}
+
+.tab-list{
+  display: flex;
+  height: 40px;
+  width: 100%;
+}
+
+.tab{
+  border-bottom: 4px solid transparent;
+  width: 100%;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  color: var(--light-blue);
+  cursor: pointer;
+}
+
+.tab.active{
+  cursor: default;
+  border-bottom-color: var(--blue);
+  color: var(--blue);
+}

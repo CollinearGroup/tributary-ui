@@ -3,10 +3,11 @@ import {observer} from 'mobx-react'
 class DataSource extends Component{
 
   render(){
-    let { source } = this.props
+    let { meta, serviceUrl, status } = this.props.source
     return (<Fragment>
-      <div>{source.name}</div>
-      <div>{source.url}</div>
+      <div>{meta.server.name}</div>
+      <div>{serviceUrl}</div>
+      <div>{meta.server.description}</div>
     </Fragment>
     )
   }

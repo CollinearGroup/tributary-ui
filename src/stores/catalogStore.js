@@ -1,8 +1,11 @@
 import { observable, action, decorate } from 'mobx';
 
+//TODO: remove this
+import { data } from './mockDataSources';
+
 class CatalogStore {
   // @observable
-  dataSources = []
+  dataSources = data
 
   // @action
   addDataSource = (dataSources) => {
@@ -10,7 +13,6 @@ class CatalogStore {
   }
 
 }
-
 
 decorate(CatalogStore, {
   dataSources: observable,
