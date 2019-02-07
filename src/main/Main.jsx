@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './main.css'
+import './Main.css'
 import Sidebar from './Sidebar'
 import Content from './Content'
 export default class Main extends Component {

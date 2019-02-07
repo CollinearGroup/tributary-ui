@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './content.css'
+import './Content.css'
 export default class Content extends Component {
 
   render() {
