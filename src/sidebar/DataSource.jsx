@@ -4,6 +4,10 @@ import { observer } from 'mobx-react'
 import defaultDataSourceLog from '../logo.svg'
 class DataSource extends Component {
 
+  handlePlotClick=()=>{
+    
+  }
+
   render() {
     let { meta /*, serviceUrl, status */ } = this.props.source
     let logo = meta.server.attribution.logo
@@ -28,7 +32,12 @@ class DataSource extends Component {
         <label className="tbt-form-label">Search Terms</label>
         <input className="tbt-form-input" type="text" name={`${meta.server.name}-search-terms`}></input>
         <div className="tbt-button-container">
-          <button className="tbt-button">Plot</button>
+          <button 
+            className="tbt-button"
+            onClick={()=>this.handlePlotClick()}
+            >
+            Plot
+          </button>
         </div>
       </div>
     </div>
