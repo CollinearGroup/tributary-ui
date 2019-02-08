@@ -1,0 +1,47 @@
+image: docker:latest
+
+stages: 
+  - build
+  - deploy-container
+  - publish
+
+services:
+  - docker:dind
+  - node:10
+    
+build:
+  stage: build
+  image: node:10
+  script:
+  - if [ -e node_modules ] ; then echo exists; else mkdir node_modules; fi
+  #- docker run --rm -v `pwd`:/app -w /app node:10 bash -c "npm install && npm run build"
+  - npm install
+  - npm run build
+  artifacts:
+    paths:
+      - build/
+  only:
+  - develop # or master, the branch you want to publish
+
+deploy:
+  stage: deploy-container
+  services:
+  - docker:dind
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build --rm -f Dockerfile -t registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest .
+  - docker push registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest
+  only:
+  - ci # or master, the branch you want to publish
+
+publish-pages:
+  stage: publish
+  script: 
+  - cp -r build public
+  artifacts:
+    paths:
+    - public # mandatory, other folder won't work
+
+cache:
+  paths:
+  - node_modules
