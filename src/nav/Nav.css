@@ -1,6 +1,13 @@
 .nav-container{
   width:100%;
-  background-color:tomato;
+  background-color: var(--blue);
   height:6rem;
   position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 600;
+  font-size: 2rem;
 }

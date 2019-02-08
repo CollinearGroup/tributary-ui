@@ -5,10 +5,10 @@ export const data = {
                 "name": "Fremont Bike Traffic",
                 "apiVersion": "0.2",
                 "attribution": {
-                    "logo": "/logo.png",
+                    "logo": "http://snickerdoodle.collineargroup.com:3007/logo.png",
                     "link": "https://data.seattle.gov/"
                 },
-                "description": "sdafqwafsredfsrazd dsthts  %saa j"
+                "description": "sdafqwafsredfsrazd dsthts  %saa j this is a long dessfdiasdjfp asdfoasdijf adsoijf asdofjsaodipfj poisam j jfposadiofj poasdijf padosijfiopdsaj fpoiasdj fpjsapfij  pajsdfipoasdj fpoiasdj fpodsji a"
             },
             "availableDataSeries": {
                 "fremont_bridge_nb": {

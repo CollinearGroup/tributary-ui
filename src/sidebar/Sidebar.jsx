@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import './Sidebar.css'
 import DataSource from './DataSource';
 import { observer, inject } from 'mobx-react'
-import { observable, action, decorate } from 'mobx'
+import { observable, decorate } from 'mobx'
 import cx from 'classnames'
+
+import magnifyingGlass from '../magnifying-glass.svg'
 
 class Sidebar extends Component {
   // @observable
@@ -38,6 +40,10 @@ class Sidebar extends Component {
         </div>
         <div className='tab-content'>
           {this.activeTabId === "sidebar-tab-1" ? (<div className='data-sources'>
+            <div className="data-source-search">
+              <img className="data-source-search-icon" src={magnifyingGlass} alt="Search"/>
+              <input className="data-source-search-input" type="search" placeholder="Search" />
+            </div>
             {Object.keys(dataSources).map(source => {
               return <DataSource key={source} source={dataSources[source]} />
             })}

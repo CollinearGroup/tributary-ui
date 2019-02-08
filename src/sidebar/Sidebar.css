@@ -1,6 +1,8 @@
 .sidebar-container{
+  border-right: .1rem solid var(--light-blue);
   min-width:36rem;
-  background-color:white;
+  width: 36rem;
+  background-color: var(--lightest-blue);
   height:100%;
 }
 
@@ -10,21 +12,23 @@
 }
 
 .tab-list{
+  background-color: white;
   display: flex;
   height: 4rem;
   width: 100%;
 }
 
 .tab{
-  border-bottom: .4rem solid transparent;
-  width: 100%;
-  height: inherit;
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  text-transform: uppercase;
+  border-bottom: .4rem solid transparent;
   color: var(--light-blue);
   cursor: pointer;
+  display: flex;
+  font-size: 1.6rem;
+  height: inherit;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  width: 100%;
 }
 
 .tab.active{
@@ -36,7 +40,7 @@
 .card{
   background-color:white;
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 1rem 1rem 2rem;
   display: flex;
 }
 
@@ -53,4 +57,85 @@
   width: 100%;
 }
 
+.card-server-name{
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: .5rem;
+}
 
+.card-server-description{
+  color: var(--blue);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tbt-form-label{
+  color: var(--blue);
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-group{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-label{
+  color: var(--blue);
+  font-size: 1.4rem;
+}
+
+.tbt-form-input{
+  width: 100%;
+  margin-bottom: 1.5rem;
+  height: 3.2rem;
+  padding: 1rem;
+  /* border-color: var(--light-blue) */
+}
+
+.tbt-button-container{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tbt-button{
+  background-color: var(--blue);
+  border-radius: .4rem;
+  color: white;
+  text-transform: uppercase;
+  width: 9rem;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.data-source-search{
+  margin: 0 0 1rem;
+  border-bottom: .2rem solid var(--blue);
+  display: flex;
+  align-items: center;
+}
+
+.data-source-search-icon{
+  height: 1rem;
+  width: 1rem;
+  color: var(--blue);
+}
+
+.data-source-search-input{
+  width: 95%;
+  border-width: 0;
+  background-color: var(--lightest-blue);
+  height: 3.2rem;
+  padding: 0 1rem;
+}
+
+.data-source-search-input::placeholder{
+  color: var(--blue);
+}

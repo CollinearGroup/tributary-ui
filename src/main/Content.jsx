@@ -3,6 +3,6 @@ import './Content.css'
 export default class Content extends Component {
 
   render() {
-    return <div className='content-container'> Content </div>
+    return <div className='content-container'>Coming Soon...</div>
   }
 }
