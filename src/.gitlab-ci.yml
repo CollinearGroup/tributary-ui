@@ -2,7 +2,7 @@ image: docker:latest
 
 stages: 
   - build
-  - deploy-container
+  - deploy
   - publish
 
 # services:
@@ -16,16 +16,12 @@ build:
   - if [ -e node_modules ] ; then echo exists; else mkdir node_modules; fi
   - npm install
   - npm run build
-  - cp -r build public
   artifacts:
     paths:
       - build/
-      - public/
-  # only:
-  # - develop # or master, the branch you want to publish
 
 deploy:
-  stage: deploy-container
+  stage: deploy
   services:
   - docker:dind
   script:
@@ -35,13 +31,15 @@ deploy:
   only:
   - master # or master, the branch you want to publish
 
-# publish-pages:
-  # stage: publish
-  # script: 
-  # - cp -r build public
-  # artifacts:
-    # paths:
-    # - public # mandatory, other folder won't work
+pages:
+  stage: publish
+  script: 
+  - cp -r build public
+  artifacts:
+    paths:
+    - public # mandatory, other folder won't work
+  only:
+    - develop
 
 cache:
   paths:
