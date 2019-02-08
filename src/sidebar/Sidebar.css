@@ -1,17 +1,22 @@
 .sidebar-container{
-  min-width:360px;
+  min-width:36rem;
   background-color:white;
   height:100%;
 }
 
+.tab-content{
+  padding: 1.5rem;
+  background-color:var(--lightest-blue);
+}
+
 .tab-list{
   display: flex;
-  height: 40px;
+  height: 4rem;
   width: 100%;
 }
 
 .tab{
-  border-bottom: 4px solid transparent;
+  border-bottom: .4rem solid transparent;
   width: 100%;
   height: inherit;
   display: flex;
@@ -27,3 +32,25 @@
   border-bottom-color: var(--blue);
   color: var(--blue);
 }
+
+.card{
+  background-color:white;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+}
+
+.card-img-container{
+  width: 20%;
+}
+
+.card-content{
+  width: 80%;
+  margin-left: 1rem;
+}
+
+.card-img{
+  width: 100%;
+}
+
+

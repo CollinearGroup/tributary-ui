@@ -7,7 +7,8 @@ export const data = {
                 "attribution": {
                     "logo": "/logo.png",
                     "link": "https://data.seattle.gov/"
-                }
+                },
+                "description": "sdafqwafsredfsrazd dsthts  %saa j"
             },
             "availableDataSeries": {
                 "fremont_bridge_nb": {
@@ -31,7 +32,8 @@ export const data = {
                 "attribution": {
                     "logo": "http://snickerdoodle.collineargroup.com:3003/logo.jpg",
                     "link": "http://www.noaa.gov"
-                }
+                },
+                "description": "sdafqwafsredfsrazd dsthts  %saa j"
             },
             "availableDataSeries": {
                 "temperature": {
@@ -57,7 +59,8 @@ export const data = {
                 "attribution": {
                     "logo": "http://snickerdoodle.collineargroup.com:3004/logo.jpg",
                     "link": "http://www.wunderground.com"
-                }
+                },
+                "description": "sdafqwafsredfsrazd dsthts  %saa j"
             },
             "availableDataSeries": {
                 "temperature": {
@@ -92,7 +95,8 @@ export const data = {
                 "apiVersion": "0.2",
                 "attribution": {
                     "text": "This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau."
-                }
+                },
+                "description": "sdafqwafsredfsrazd dsthts  %saa j"
             },
             "availableDataSeries": {
                 "povertyRate": {

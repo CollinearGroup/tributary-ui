@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Sidebar.css'
-import DataSource from '../main/components/DataSource';
+import DataSource from './DataSource';
 import { observer, inject } from 'mobx-react'
 import { observable, action, decorate } from 'mobx'
 import cx from 'classnames'
