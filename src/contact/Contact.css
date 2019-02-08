@@ -1,0 +1,56 @@
+.contact-container {
+  display:flex;
+  height:100%;
+  padding-top:6rem;
+  justify-content: center;
+} 
+
+.contact-headers-container{
+  padding: 1rem 1.5rem;
+  text-align: center;
+
+}
+
+.contact-header{
+  font-size: 2rem;
+  padding-bottom: .5rem;
+}
+
+.contact-subheader{
+font-size: 1.5rem;
+}
+
+.contact-info{
+  padding-top:2rem;
+}
+
+.form-row{
+  display:flex; 
+  padding:1rem;
+}
+
+.contact-form-input{
+  padding: .5rem;
+  margin: .5rem;
+}
+
+.contact-button-container{
+  display:flex;
+  justify-content: flex-end;
+  margin: 1.5rem;
+}
+
+.contact-form-input#subjectInput{
+  width:100%;
+}
+
+.contact-message-container{
+  display: flex;
+  align-items: flex-start;
+}
+
+#messageInput{
+  height: 15rem;
+  width:100%;
+}
+ 

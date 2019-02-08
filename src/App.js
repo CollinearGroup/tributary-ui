@@ -8,7 +8,7 @@ import { observable, decorate } from 'mobx'
 
 class App extends Component {
   // @observable
-  activePage = 'main'
+  activePage = 'contact'
 
   handleContactClick = (page) => {
     this.activePage = page
