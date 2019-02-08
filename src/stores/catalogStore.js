@@ -7,6 +7,9 @@ class CatalogStore {
   // @observable
   dataSources = data
 
+  // @observable 
+  activePage = 'main'
+
   // @action
   addDataSource = (dataSources) => {
     this.dataSources = dataSources
@@ -16,6 +19,7 @@ class CatalogStore {
 
 decorate(CatalogStore, {
   dataSources: observable,
+  activePage: observable,
   addDataSource: action
 })
 

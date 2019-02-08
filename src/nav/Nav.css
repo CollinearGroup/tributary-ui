@@ -14,4 +14,10 @@
 
 .nav-collinear-logo{
   height: 40px;
+  padding-right:1rem;
+}
+
+.nav-item{
+  padding: 0 1rem;
+  cursor: pointer;
 }

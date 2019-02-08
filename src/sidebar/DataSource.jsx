@@ -7,7 +7,6 @@ class DataSource extends Component {
   render() {
     let { meta /*, serviceUrl, status */ } = this.props.source
     let logo = meta.server.attribution.logo
-    console.log("logo: ", logo)
     return <div className="card">
       <div className="card-img-container">
         <img className="card-img" src={logo || defaultDataSourceLog} alt="Data Source Logo" />
