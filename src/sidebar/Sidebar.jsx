@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { observable, decorate } from 'mobx'
 import cx from 'classnames'
 
-import magnifyingGlass from '../magnifying-glass.svg'
+import magnifyingGlass from '../assets/magnifying-glass.svg'
 
 class Sidebar extends Component {
   // @observable
