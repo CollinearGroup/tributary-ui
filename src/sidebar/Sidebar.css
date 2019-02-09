@@ -37,11 +37,34 @@
   color: var(--blue);
 }
 
+  
+.card-collapse-toggle{
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  display: flex;
+}
+
+.collapsible-content{
+  max-height: 0;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: flex-end;
+  transition: max-height .2s ease-in-out;
+}
+
+.collapsible-content.expanded{
+  max-height: 100rem;
+  transition: max-height .3s ease-in-out;
+}
+
+.collapsible-content-inner{
+  width:80%;
+}
+
 .card{
   background-color:white;
   margin-bottom: 1rem;
-  padding: 1rem 1rem 2rem;
-  display: flex;
+  padding: 1rem;
 }
 
 .card-img-container{
