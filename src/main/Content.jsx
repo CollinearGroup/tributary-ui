@@ -4,7 +4,7 @@ import './Content.css'
 import './Graph.css'
 import { observable, decorate, action } from 'mobx'
 
-import { fakeData } from '../fake-data'
+//import { fakeData } from '../fake-data'
 export default class Content extends Component {
   // @observable
   plotState = {
