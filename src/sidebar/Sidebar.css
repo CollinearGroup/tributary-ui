@@ -80,11 +80,23 @@
   width: 100%;
 }
 
+.arrow-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:.5rem;
+}
+
+.arrow-icon, 
+.search-icon{
+  color: var(--blue)
+}
+
 .card-server-name{
   color: var(--blue);
   font-weight: 600;
   font-size: 1.4rem;
-  margin-bottom: .5rem;
+
 }
 
 .card-server-description{

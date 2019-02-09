@@ -5,8 +5,6 @@ import { observer, inject } from 'mobx-react'
 import { observable, decorate } from 'mobx'
 import cx from 'classnames'
 
-import magnifyingGlass from '../assets/magnifying-glass.svg'
-
 class Sidebar extends Component {
   // @observable
   activeTabId = "sidebar-tab-1"
@@ -41,7 +39,9 @@ class Sidebar extends Component {
         <div className='tab-content'>
           {this.activeTabId === "sidebar-tab-1" ? (<div className='data-sources'>
             <div className="data-source-search">
-              <img className="data-source-search-icon" src={magnifyingGlass} alt="Search"/>
+            <i className="material-icons search-icon">
+                search
+              </i>
               <input className="data-source-search-input" type="search" placeholder="Search" />
             </div>
             {Object.keys(dataSources).map(source => {
