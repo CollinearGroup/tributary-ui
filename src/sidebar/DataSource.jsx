@@ -10,11 +10,11 @@ class DataSource extends Component {
   componentState = {
     expanded: false,
     selectedSeries: [],
+    selectedCheckboxes:[],
     propertyInput: ''
   }
 
   handlePlotClick = (e) => {
-    let seriesData = []
     this.componentState.selectedSeries.forEach(selectedSeries => {
       let plotData = {
         id: `${Date.now()}-${selectedSeries}`,
@@ -26,18 +26,15 @@ class DataSource extends Component {
         }
       }
       this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+      this.componentState.propertyInput = ''
+      this.componentState.selectedSeries = []
     })
-    // {
-    //   ...this.componentState,
-    //   sourceId: this.props.source.id,
-    //   id: Date.now()
-    // }
   }
 
   handleCheckboxClick = (e) => {
-    let {checked, dataset} = e.currentTarget
-    if(checked) {
-      if(!this.componentState.selectedSeries.includes(dataset.seriesName)) {
+    let { checked, dataset } = e.currentTarget
+    if (checked) {
+      if (!this.componentState.selectedSeries.includes(dataset.seriesName)) {
         this.componentState.selectedSeries.push(dataset.seriesName)
       }
     } else {
@@ -68,12 +65,12 @@ class DataSource extends Component {
     this.props.activeDataSeriesStore.activeDataSeries.forEach(series => {
       if (series.sourceId === this.props.source.id) {
         plottedSeries.push(
-          <ActiveDataSeriesSidebar key={series.id}  series={series}/>
+          <ActiveDataSeriesSidebar key={series.id} series={series} />
         )
       }
     })
     // console.log("PLOTSERIES: ", this.props.activeDataSeriesStore.activeDataSeries)
- 
+
 
     return (
       <div className="card">
@@ -87,29 +84,34 @@ class DataSource extends Component {
               <i className="material-icons arrow-icon">
                 {this.componentState.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
               </i>
-            </div>  
+            </div>
             <p className="card-server-description">{meta.server.description}</p>
+
           </div>
         </div>
-
+        <div id='active-series' className="active-series-container">
+          {plottedSeries}
+        </div>
         <div className={cx("collapsible-content", {
           expanded: this.componentState.expanded
         })}>
           <div className="collapsible-content-inner">
             <div className="checkbox-group">
+
               <h3 className="tbt-form-label">Properties</h3>
               {Object.keys(meta.availableDataSeries).map(series => {
                 const property = meta.availableDataSeries[series].name
                 return (<div key={property}>
                   <label className="checkbox-label" htmlFor={`input-${series}-${this.props.source.id}`}>{property}
-                  <input 
-                    id={`input-${series}-${this.props.source.id}`}
-                    data-series-name={series}
-                    className="checkbox" 
-                    type="checkbox" 
-                    name={property} 
-                    onClick={this.handleCheckboxClick}
-                  />
+                    <input
+                      id={`input-${series}-${this.props.source.id}`}
+                      data-series-name={series}
+                      className="checkbox"
+                      type="checkbox"
+                      checked={this.componentState.selectedSeries.includes(series)}
+                      name={property}
+                      onClick={this.handleCheckboxClick}
+                    />
                   </label>
                 </div>)
               })}
@@ -119,6 +121,7 @@ class DataSource extends Component {
               <input
                 className="tbt-form-input"
                 type="text"
+                value={this.componentState.propertyInput}
                 name={`${meta.server.name}-search-terms`}
                 placeholder={dataSeriesInput.description}
                 onChange={this.handlePropertyInputChange}
@@ -131,10 +134,6 @@ class DataSource extends Component {
               >
                 Plot
                   </button>
-            </div>
-
-            <div className="active-series">
-            {plottedSeries}
             </div>
           </div>
         </div>

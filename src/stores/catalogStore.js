@@ -13,6 +13,8 @@ class CatalogStore {
   // @action
   addDataSource = (dataSources) => {
     this.dataSources = dataSources
+    // selectedSeries='',
+
   }
 
 }

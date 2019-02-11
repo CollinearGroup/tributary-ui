@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
-// import DataSource from './DataSource';
 import { observer, inject } from 'mobx-react'
-// import { observable, decorate } from 'mobx'
-// import cx from 'classnames'
 
 class ActiveDataSeriesSidebar extends Component {
-  // @observable
-  // activeTabId = "sidebar-tab-1"
+
+  handleCloseClick=(e) =>{
+    this.props.actions.removeActiveSeries( this.props.activeDataSeriesStore, e.target.id)
+  } 
 
   render() {
-    console.log("SERIES: ", JSON.stringify(this.props.series))
-    let {series} = this.props
-    return (<div>
-    {series.property.key}-{series.propertyInput}
-    </div>)
+
+    let { series } = this.props
+    return (
+      <div className='active-data-series'>
+        <p>{series.property.key}-{series.propertyInput}</p>
+        <i 
+          className="material-icons close-icon"
+          id={series.id}
+          onClick={this.handleCloseClick}
+          >
+          close
+        </i>
+      </div>)
+
   }
 }
 
-// decorate(ActiveDataSeriesSidebar, {
-  // activeTabId: observable
-// })
-
-export default inject("actions", "catalogStore")(observer(ActiveDataSeriesSidebar))
+export default inject("actions", "activeDataSeriesStore")(observer(ActiveDataSeriesSidebar))
