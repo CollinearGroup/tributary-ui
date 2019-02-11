@@ -15,6 +15,7 @@ build:
   - if [ -e node_modules ] ; then echo exists; else mkdir node_modules; fi
   #- docker run --rm -v `pwd`:/app -w /app node:10 bash -c "npm install && npm run build"
   - npm install
+  - npm prune --prod
   - npm run build
   artifacts:
     paths:

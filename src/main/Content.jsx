@@ -8,22 +8,22 @@ import { observable, decorate, action } from 'mobx'
 export default class Content extends Component {
   // @observable
   plotState = {
-    data:[{
+    data: [{
       x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       y: [0, 3, 6, 4, 5, 2, 3, 5, 4],
       type: 'scatter',
-      mode:'lines',
-      name:'test1',
+      mode: 'lines',
+      name: 'test1',
       marker: { color: 'purple' }
     },
     {
       x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       y: [0, 4, 7, 8, 3, 6, 3, 3, 4],
       type: 'scatter',
-      mode:'lines',
-      name:'test2'
+      mode: 'lines',
+      name: 'test2'
     }],
-    
+
     // [{
     //   x: fakeData.initialDataSet.map(datum => new Date(datum[0])),
     //   y: fakeData.initialDataSet.map(datum => datum[1]),
@@ -39,8 +39,8 @@ export default class Content extends Component {
     // }],
     layout: {
       autosize: true,
-      showlegend:true,
-      legend:{ x:0, y:4, orientation:'h'},
+      showlegend: true,
+      legend: { x: 0, y: 4, orientation: 'h' },
       xaxis: {
         // rangeselector: {buttons: [
         //     {
@@ -68,7 +68,7 @@ export default class Content extends Component {
     config: { responsive: true }
   }
 
-  handleGraphUpdate = (nextPlotState ) => {
+  handleGraphUpdate = (nextPlotState) => {
     this.plotState = nextPlotState
   }
 
