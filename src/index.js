@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
-import * as actions from './actions'
+import actions from './actions'
 import store from './stores'
 ReactDOM.render(<Provider actions={ actions } { ...store }><App /></Provider>, document.getElementById('root'));
 

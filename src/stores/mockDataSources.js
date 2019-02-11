@@ -1,5 +1,6 @@
-export const data = {
-    "bike": {
+export const data = [
+    {
+        "id": "bike",
         "meta": {
             "server": {
                 "name": "Fremont Bike Traffic",
@@ -24,7 +25,8 @@ export const data = {
         "serviceUrl": "http://snickerdoodle.collineargroup.com:3007",
         "status": {}
     },
-    "noaa": {
+    {
+        "id": "noaa",
         "meta": {
             "server": {
                 "name": "NOAA Server",
@@ -51,7 +53,8 @@ export const data = {
         "serviceUrl": "http://snickerdoodle.collineargroup.com:3003",
         "status": {}
     },
-    "wuwx": {
+    {
+        "id": "wuwx",
         "meta": {
             "server": {
                 "name": "Weather Underground",
@@ -88,7 +91,8 @@ export const data = {
         "serviceUrl": "http://snickerdoodle.collineargroup.com:3004",
         "status": {}
     },
-    "census": {
+    {
+        "id": "census",
         "meta": {
             "server": {
                 "name": "US Census Data",
@@ -114,4 +118,4 @@ export const data = {
         "serviceUrl": "http://snickerdoodle.collineargroup.com:3005",
         "status": {}
     }
-}
+]

@@ -1,5 +1,7 @@
-// adds data source to your observable store and local storage 
-export function addLocalDataSource(catalogStore, source) {
-  const nextDataSources = [...catalogStore.dataSources, source]
-  catalogStore.addDataSource(nextDataSources)
+import * as activeDataSeriesActions from './activeDataSeriesActions'
+
+const actions = {
+  ...activeDataSeriesActions
 }
+
+export default actions

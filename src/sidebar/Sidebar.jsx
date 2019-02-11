@@ -44,8 +44,8 @@ class Sidebar extends Component {
               </i>
               <input className="data-source-search-input" type="search" placeholder="Search" />
             </div>
-            {Object.keys(dataSources).map(source => {
-              return <DataSource key={source} source={dataSources[source]} />
+            {dataSources.map(source => {
+              return <DataSource key={source.id} source={source} />
             })}
           </div>) : <div>analysis content</div>}
         </div>
