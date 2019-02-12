@@ -26,20 +26,20 @@ deploy:
   - docker:dind
   script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  - docker build --rm -f Dockerfile -t registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest .
+  - docker build --rm -f docker_deploy/Dockerfile -t registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest .
   - docker push registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest
   only:
-  - master # or master, the branch you want to publish
+  - develop # or master, the branch you want to publish
 
-pages:
-  stage: publish
-  script: 
-  - cp -r build public
-  artifacts:
-    paths:
-    - public # mandatory, other folder won't work
-  only:
-    - develop
+# pages:
+#   stage: publish
+#   script: 
+#   - cp -r build public
+#   artifacts:
+#     paths:
+#     - public # mandatory, other folder won't work
+#   only:
+#     - develop
 
 cache:
   paths:
