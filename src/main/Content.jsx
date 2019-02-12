@@ -2,20 +2,20 @@ import React, { Component } from 'react'
 import Plot from 'react-plotly.js';
 import './Content.css'
 import './Graph.css'
+import graphColors from '../assets/graphColors'
 import { observable, decorate, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 
-//import { fakeData } from '../fake-data'
 class Content extends Component {
   // @observable
   plotState = {
-    data: [{
+    data:
+    [{
       x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       y: [0, 3, 6, 4, 5, 2, 3, 5, 4],
       type: 'scatter',
       mode: 'lines',
-      name: 'test1',
-      marker: { color: 'purple' }
+      name: 'test1'
     },
     {
       x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -39,6 +39,7 @@ class Content extends Component {
     //   marker: { color: 'yellow' }
     // }],
     layout: {
+      colorway: graphColors,
       autosize: true,
       showlegend: true,
       legend: { x: 0, y: 4, orientation: 'h' },
@@ -68,12 +69,6 @@ class Content extends Component {
     frames: [],
     config: { responsive: true }
   }
-
-  // constructor() {
-    // super()
-    // let { activeDataSeries } = this.props.activeDataSeriesStore
-    // console.log("ACTIVE SERIES: ", activeDataSeries)
-  // }
 
   handleGraphUpdate = (nextPlotState) => {
     this.plotState = nextPlotState
@@ -108,7 +103,7 @@ class Content extends Component {
     let { activeDataSeries } = this.props.activeDataSeriesStore
     console.log("ACTIVE SERIES: ", JSON.stringify(activeDataSeries))
     this.syncSeries(activeDataSeries)
-    
+
     return (
       <div className='content-container'>
         <Plot
