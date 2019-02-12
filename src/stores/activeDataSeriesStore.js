@@ -3,6 +3,13 @@ import { observable, decorate, action } from 'mobx';
 class ActiveDataSeriesStore {
 
   // @observable
+  /**
+   * Expected store format:
+   * id
+   * sourceId
+   * propertyInput
+   * property.key
+   */
   activeDataSeries = []
 
   // @action
