@@ -15,20 +15,28 @@ class DataSource extends Component {
   }
 
   handlePlotClick = (e) => {
-    this.componentState.selectedSeries.forEach(selectedSeries => {
+    this.componentState.selectedSeries.forEach(selectedProperty => {
       let plotData = {
-        id: `${Date.now()}-${selectedSeries}`,
+        id: `${Date.now()}-${selectedProperty}`,
         sourceId: this.props.source.id,
+        serviceUrl: this.props.source.serviceUrl,
         propertyInput: this.componentState.propertyInput,
+        name: `${this.props.source.id}-${selectedProperty}-${this.componentState.propertyInput}`,
         property: {
-          key: selectedSeries
+          key: selectedProperty
           //TODO: Add display name, description, etc.
-        }
+        },
+      }
+
+      //Add the attribute
+      if (this.props.source.meta.availableDataSeries[selectedProperty].attributes) {
+        plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)[0]
       }
       this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
-      this.componentState.propertyInput = ''
-      this.componentState.selectedSeries = []
     })
+    this.componentState.propertyInput = ''
+    this.componentState.selectedSeries = []
+
   }
 
   handleCheckboxClick = (e) => {
