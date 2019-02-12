@@ -38,6 +38,8 @@ publish-pages:
   stage: deploy
   script: 
   - cp -r build public
+  only:
+  - develop
 
 cache:
   paths:
