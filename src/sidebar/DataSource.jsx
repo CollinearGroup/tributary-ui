@@ -110,7 +110,7 @@ class DataSource extends Component {
                       type="checkbox"
                       checked={this.componentState.selectedSeries.includes(series)}
                       name={property}
-                      onClick={this.handleCheckboxClick}
+                      onChange={this.handleCheckboxClick}
                     />
                   </label>
                 </div>)

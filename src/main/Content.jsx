@@ -5,7 +5,6 @@ import './Graph.css'
 import graphColors from '../assets/graphColors'
 import { observable, decorate, action } from 'mobx'
 
-import { fakeData } from '../fake-data'
 export default class Content extends Component {
   // @observable
   plotState = {

@@ -1,3 +1,11 @@
-const colors = ['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-
-export default  colors
+const colors = [
+  "#003f5c",
+  "#ffa600",
+  "#2f4b7c",
+  "#ff7c43",
+  "#665191",
+  "#f95d6a",
+  "#a05195",
+  "#d45087"
+]
+export default colors
