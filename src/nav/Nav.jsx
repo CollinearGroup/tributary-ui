@@ -19,20 +19,20 @@ export default class Nav extends Component {
           >
             <img src={collinearLogo} alt='logo' className='nav-collinear-logo' />
           </a>
-          <div
+          { <div
             className="nav-item"
             value={"main"}
             onClick={this.handleContact}
           >
             Tributary
           </div>
-          <div
+          /*<div
             className="nav-item"
             value={"contact"}
             onClick={this.handleContact}
           >
             CONTACT
-          </div>
+          </div> */}
         </div>
       </div>
     )

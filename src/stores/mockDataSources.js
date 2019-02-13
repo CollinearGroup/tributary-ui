@@ -9,7 +9,7 @@ export const data = [
                     "logo": "http://snickerdoodle.collineargroup.com:3007/logo.png",
                     "link": "https://data.seattle.gov/"
                 },
-                "description": "sdafqwafsredfsrazd dsthts  %saa j this is a long dessfdiasdjfp asdfoasdijf adsoijf asdofjsaodipfj poisam j jfposadiofj poasdijf padosijfiopdsaj fpoiasdj fpjsapfij  pajsdfipoasdj fpoiasdj fpodsji a"
+                "description": "Hourly bike count across Fremont Bridge from Seattle Open Data"
             },
             "availableDataSeries": {
                 "fremont_bridge_nb": {
@@ -35,7 +35,7 @@ export const data = [
                     "logo": "http://snickerdoodle.collineargroup.com:3003/logo.jpg",
                     "link": "http://www.noaa.gov"
                 },
-                "description": "sdafqwafsredfsrazd dsthts  %saa j"
+                "description": "7 day weather forecast from NOAA."
             },
             "availableDataSeries": {
                 "temperature": {
@@ -63,7 +63,7 @@ export const data = [
                     "logo": "http://snickerdoodle.collineargroup.com:3004/logo.jpg",
                     "link": "http://www.wunderground.com"
                 },
-                "description": "sdafqwafsredfsrazd dsthts  %saa j"
+                "description": "10 day weather forecast from Weather Underground."
             },
             "availableDataSeries": {
                 "temperature": {
@@ -100,7 +100,7 @@ export const data = [
                 "attribution": {
                     "text": "This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau."
                 },
-                "description": "sdafqwafsredfsrazd dsthts  %saa j"
+                "description": "Data from US Census"
             },
             "availableDataSeries": {
                 "povertyRate": {

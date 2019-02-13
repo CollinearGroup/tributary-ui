@@ -29,7 +29,7 @@ deploy:
   - docker build --rm -f docker_deploy/Dockerfile -t registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest .
   - docker push registry.gitlab.com/collinear/tributary/$CI_PROJECT_NAME:latest
   only:
-  - develop # or master, the branch you want to publish
+  - master # or master, the branch you want to publish
 
 # pages:
 #   stage: publish

@@ -10,12 +10,14 @@ class DataSource extends Component {
   componentState = {
     expanded: false,
     selectedSeries: [],
-    selectedCheckboxes:[],
-    propertyInput: ''
+    selectedCheckboxes: [],
+    propertyInput: '',
+    errorMessage: '',
+    requestInFlight: false
   }
 
   handlePlotClick = (e) => {
-    this.componentState.selectedSeries.forEach(selectedProperty => {
+    this.componentState.selectedSeries.forEach(async selectedProperty => {
       let plotData = {
         id: `${Date.now()}-${selectedProperty}`,
         sourceId: this.props.source.id,
@@ -32,11 +34,21 @@ class DataSource extends Component {
       if (this.props.source.meta.availableDataSeries[selectedProperty].attributes) {
         plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)[0]
       }
-      this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+    
+      try {
+        this.componentState.requestInFlight = true
+        this.componentState.errorMessage = ''
+        await this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+        
+        this.componentState.propertyInput = ''
+        this.componentState.selectedSeries = []
+        this.componentState.requestInFlight = false        
+      } catch (err) {
+        this.componentState.requestInFlight = false
+        this.componentState.errorMessage = "Unable to retrieve data."
+        console.error("datasource err", err)
+      }
     })
-    this.componentState.propertyInput = ''
-    this.componentState.selectedSeries = []
-
   }
 
   handleCheckboxClick = (e) => {
@@ -119,6 +131,7 @@ class DataSource extends Component {
                       checked={this.componentState.selectedSeries.includes(series)}
                       name={property}
                       onChange={this.handleCheckboxClick}
+                      disabled={this.componentState.requestInFlight}
                     />
                   </label>
                 </div>)
@@ -133,16 +146,22 @@ class DataSource extends Component {
                 name={`${meta.server.name}-search-terms`}
                 placeholder={dataSeriesInput.description}
                 onChange={this.handlePropertyInputChange}
+                disabled={this.componentState.requestInFlight}
               /></Fragment>
             }
             <div className="tbt-button-container">
               <button
                 className="tbt-button"
                 onClick={this.handlePlotClick}
+                disabled={this.componentState.requestInFlight || this.componentState.selectedSeries.length === 0}
               >
                 Plot
                   </button>
             </div>
+          {
+            this.componentState.errorMessage && 
+            <div className="data-source-request-error">{this.componentState.errorMessage}</div>
+          }
           </div>
         </div>
       </div>)
@@ -152,7 +171,8 @@ class DataSource extends Component {
 
 decorate(DataSource, {
   componentState: observable,
-  toggleExpanded: action
+  toggleExpanded: action,
+  handlePlotClick: action
 })
 
 export default inject("actions", "activeDataSeriesStore")(observer(DataSource))
