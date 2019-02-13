@@ -10,12 +10,14 @@ class DataSource extends Component {
   componentState = {
     expanded: false,
     selectedSeries: [],
-    selectedCheckboxes:[],
-    propertyInput: ''
+    selectedCheckboxes: [],
+    propertyInput: '',
+    errorMessage: '',
+    requestInFlight: false
   }
 
   handlePlotClick = (e) => {
-    this.componentState.selectedSeries.forEach(selectedProperty => {
+    this.componentState.selectedSeries.forEach(async selectedProperty => {
       let plotData = {
         id: `${Date.now()}-${selectedProperty}`,
         sourceId: this.props.source.id,
@@ -32,11 +34,20 @@ class DataSource extends Component {
       if (this.props.source.meta.availableDataSeries[selectedProperty].attributes) {
         plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)[0]
       }
-      this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+    
+      try {
+        this.componentState.requestInFlight = true
+        await this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+        
+        this.componentState.propertyInput = ''
+        this.componentState.selectedSeries = []
+        this.componentState.requestInFlight = false
+      } catch (err) {
+        this.componentState.requestInFlight = false
+        this.componentState.errorMessage = "Unable to retrieve data."
+        console.error("datasource err", err)
+      }
     })
-    this.componentState.propertyInput = ''
-    this.componentState.selectedSeries = []
-
   }
 
   handleCheckboxClick = (e) => {
@@ -143,6 +154,10 @@ class DataSource extends Component {
                 Plot
                   </button>
             </div>
+          {
+            this.componentState.errorMessage && 
+            <div className="data-series-request-err-msg">{this.componentState.errorMessage}</div>
+          }
           </div>
         </div>
       </div>)
