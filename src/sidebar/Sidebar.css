@@ -220,3 +220,7 @@
 .data-source-search-input::placeholder{
   color: var(--blue);
 }
+
+.data-source-request-error{
+  color: var(--red);
+}

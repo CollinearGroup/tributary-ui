@@ -37,11 +37,12 @@ class DataSource extends Component {
     
       try {
         this.componentState.requestInFlight = true
+        this.componentState.errorMessage = ''
         await this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
         
         this.componentState.propertyInput = ''
         this.componentState.selectedSeries = []
-        this.componentState.requestInFlight = false
+        this.componentState.requestInFlight = false        
       } catch (err) {
         this.componentState.requestInFlight = false
         this.componentState.errorMessage = "Unable to retrieve data."
@@ -130,6 +131,7 @@ class DataSource extends Component {
                       checked={this.componentState.selectedSeries.includes(series)}
                       name={property}
                       onChange={this.handleCheckboxClick}
+                      disabled={this.componentState.requestInFlight}
                     />
                   </label>
                 </div>)
@@ -144,19 +146,21 @@ class DataSource extends Component {
                 name={`${meta.server.name}-search-terms`}
                 placeholder={dataSeriesInput.description}
                 onChange={this.handlePropertyInputChange}
+                disabled={this.componentState.requestInFlight}
               /></Fragment>
             }
             <div className="tbt-button-container">
               <button
                 className="tbt-button"
                 onClick={this.handlePlotClick}
+                disabled={this.componentState.requestInFlight}
               >
                 Plot
                   </button>
             </div>
           {
             this.componentState.errorMessage && 
-            <div className="data-series-request-err-msg">{this.componentState.errorMessage}</div>
+            <div className="data-source-request-error">{this.componentState.errorMessage}</div>
           }
           </div>
         </div>
@@ -167,7 +171,8 @@ class DataSource extends Component {
 
 decorate(DataSource, {
   componentState: observable,
-  toggleExpanded: action
+  toggleExpanded: action,
+  handlePlotClick: action
 })
 
 export default inject("actions", "activeDataSeriesStore")(observer(DataSource))

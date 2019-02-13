@@ -24,8 +24,6 @@ export async function addActiveDataSeries(store, seriesInfo) {
     console.log("Requesting data from: ", url)
     let seriesData = await getSeriesData(url)
 
-    // console.log("RESPONSE: ", seriesData)
-
     //Inject some fake data
     //TODO extract to some utility
 
