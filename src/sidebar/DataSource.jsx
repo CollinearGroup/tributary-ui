@@ -153,7 +153,7 @@ class DataSource extends Component {
               <button
                 className="tbt-button"
                 onClick={this.handlePlotClick}
-                disabled={this.componentState.requestInFlight}
+                disabled={this.componentState.requestInFlight || this.componentState.selectedSeries.length === 0}
               >
                 Plot
                   </button>
