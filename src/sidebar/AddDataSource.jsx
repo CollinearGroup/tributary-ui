@@ -10,7 +10,8 @@ class AddDataSource extends Component {
   // @observable
   componentState = {
     urlInput: '',
-    serviceData: ''
+    serviceData: '',
+    urlRequestError: ''
   }
 
   handleCancel = () => {
@@ -18,9 +19,21 @@ class AddDataSource extends Component {
   }
 
   handleSubmit = async () => {
-    let response = await axios.get(this.componentState.urlInput)
+    if(!this.componentState.urlInput) {
+      return
+    }
+    let response
+    try {
+      this.componentState.urlRequestError = ''
+      response = await axios.get(this.componentState.urlInput)
+    } catch (err) {
+      console.log("ERR: ", err)
+      this.componentState.urlRequestError = err.message
+      return
+    }
     let { data } = response
     let source = { id: Date.now(), meta: { ...data }, serviceUrl: this.componentState.urlInput }
+    console.log("Setting service data to ", source)
     this.componentState.serviceData = source
   }
 
@@ -67,10 +80,16 @@ class AddDataSource extends Component {
           </button>
           : <button
           className="tbt-button"
+          disabled={!this.componentState.urlInput}
             onClick={this.handleSubmit}
           >
             SUBMIT
           </button>
+        }
+        {this.componentState.urlRequestError && 
+          <div className='data-source-request-error'>
+            {this.componentState.urlRequestError}
+          </div>
         }
       </div>
     </div>

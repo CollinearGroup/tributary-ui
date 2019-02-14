@@ -205,6 +205,9 @@
   font-size: 1rem;
   font-weight: 600;
 }
+.tbt-button:disabled{
+  background-color: var(--light-blue);
+}
 
 .data-source-search{
   margin: 0 0 1rem;
