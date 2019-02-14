@@ -25,7 +25,7 @@ class ActiveDataSeriesSidebar extends Component {
         className='active-data-series'
         style={this.getBackgroundColor()}
       >
-        <p>{series.property.key}-{series.propertyInput}</p>
+        <p>{series.property.name} {series.propertyInput}</p>
         <i
           className="material-icons close-icon"
           id={series.id}

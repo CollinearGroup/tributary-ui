@@ -22,13 +22,18 @@ class DataSource extends Component {
       let plotData = {
         id: `${Date.now()}-${selectedProperty}`,
         sourceId: this.props.source.id,
+        sourceName: this.props.source.meta.server.name,
         serviceUrl: this.props.source.serviceUrl,
         propertyInput: this.componentState.propertyInput,
-        name: `${this.props.source.id}-${selectedProperty}-${this.componentState.propertyInput}`,
         property: {
-          key: selectedProperty
-          //TODO: Add display name, description, etc.
+          key: selectedProperty,
+          name: this.props.source.meta.availableDataSeries[selectedProperty].name
         },
+      }
+
+      plotData.name = `${plotData.sourceName} - ${plotData.property.name}`
+      if(plotData.propertyInput) {
+        plotData.name += ` - ${plotData.propertyInput}`
       }
 
       //Add the attribute
@@ -120,9 +125,21 @@ class DataSource extends Component {
           expanded: this.componentState.expanded
         })}>
           <div className="collapsible-content-inner">
+            {dataSeriesProps && <Fragment>
+              <label className="tbt-form-label">{dataSeriesInput.name}</label>
+              <input
+                className="tbt-form-input"
+                type="text"
+                value={this.componentState.propertyInput}
+                name={`${meta.server.name}-search-terms`}
+                placeholder={dataSeriesInput.description}
+                onChange={this.handlePropertyInputChange}
+                disabled={this.componentState.requestInFlight}
+              /></Fragment>
+            }
             <div className="checkbox-group">
 
-              <h3 className="tbt-form-label">Properties</h3>
+              {/* <h3 className="tbt-form-label">Properties</h3> */}
               {Object.keys(meta.availableDataSeries).map(series => {
                 const property = meta.availableDataSeries[series].name
                 return (<div key={property}>
@@ -141,18 +158,6 @@ class DataSource extends Component {
                 </div>)
               })}
             </div>
-            {dataSeriesProps && <Fragment>
-              <label className="tbt-form-label">{dataSeriesInput.name}</label>
-              <input
-                className="tbt-form-input"
-                type="text"
-                value={this.componentState.propertyInput}
-                name={`${meta.server.name}-search-terms`}
-                placeholder={dataSeriesInput.description}
-                onChange={this.handlePropertyInputChange}
-                disabled={this.componentState.requestInFlight}
-              /></Fragment>
-            }
             <div className="tbt-button-container">
               {!this.props.disablePlot && <button
                 className="tbt-button"
