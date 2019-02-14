@@ -5,6 +5,7 @@ import AddDataSource from './AddDataSource'
 import { observer, inject } from 'mobx-react'
 import { observable, decorate, action } from 'mobx'
 import cx from 'classnames'
+import Analysis from './Analysis';
 
 class Sidebar extends Component {
   // @observable
@@ -71,7 +72,7 @@ class Sidebar extends Component {
                       Add Your Own Data
               </button>
                   </div>
-                </div>) : <div>analysis content</div>}
+                </div>) : <Analysis />}
             </div>
           </div>
         </div>

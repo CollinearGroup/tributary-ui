@@ -31,6 +31,7 @@ export async function addActiveDataSeries(store, seriesInfo) {
       x: seriesData.initialDataSet.map(v => v[0]),
       y: seriesData.initialDataSet.map(v => v[1]),
       name: seriesInfo.name,
+      // seriesId: seriesInfo.id
       // marker: { color: 'purple' },
     }
 

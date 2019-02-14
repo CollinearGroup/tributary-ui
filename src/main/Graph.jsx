@@ -9,35 +9,6 @@ import { observer, inject } from 'mobx-react'
 class Graph extends Component {
   // @observable
   plotState = {
-    // data:
-    // [{
-    //   x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    //   y: [0, 3, 6, 4, 5, 2, 3, 5, 4],
-    //   type: 'scatter',
-    //   mode: 'lines',
-    //   name: 'test1'
-    // },
-    // {
-    //   x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-    //   y: [0, 4, 7, 8, 3, 6, 3, 3, 4],
-    //   type: 'scatter',
-    //   mode: 'lines',
-    //   name: 'test2'
-    // }],
-
-    // [{
-    //   x: fakeData.initialDataSet.map(datum => new Date(datum[0])),
-    //   y: fakeData.initialDataSet.map(datum => datum[1]),
-    //   type: 'scatter',
-    //   mode: 'lines',
-    //   marker: { color: 'purple' }
-    // }, {
-    //   x: fakeData.initialDataSet.map(datum => new Date(datum[0])),
-    //   y: fakeData.initialDataSet.map(datum => datum[1]),
-    //   type: 'scatter',
-    //   mode: 'lines',
-    //   marker: { color: 'yellow' }
-    // }],
     layout: {
       colorway: graphColors,
       autosize: true,
@@ -98,6 +69,16 @@ class Graph extends Component {
           layout={this.plotState.layout}
           config={this.plotState.config}
           onUpdate={this.handleGraphUpdate}
+          onHover={e => { 
+            // console.log("HOVER: ", JSON.stringify(e.points[0].data))
+            this.props.activeDataSeriesStore.setHoverData(e.points.map(pt => {
+              return {
+                name: pt.data.name,
+                x: pt.x,
+                y: pt.y
+              }
+            }))
+          }}
         />
       </div>
     )
