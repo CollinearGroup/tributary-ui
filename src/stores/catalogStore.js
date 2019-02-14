@@ -11,15 +11,20 @@ class CatalogStore {
   activePage = 'main'
 
   // @action
-  addDataSource = (dataSources) => {
+  setDataSources = (dataSources) => {
     this.dataSources = dataSources
   }
 
+  // @action
+  addDataSource = (dataSource) => {
+    this.dataSources.push(dataSource)
+  }
 }
 
 decorate(CatalogStore, {
   dataSources: observable,
   activePage: observable,
+  setDataSources: action,
   addDataSource: action
 })
 

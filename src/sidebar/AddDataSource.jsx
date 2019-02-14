@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DataSource from './DataSource';
 import { observer, inject } from 'mobx-react'
 import { observable, decorate, action } from 'mobx'
-import cx from 'classnames'
+// import cx from 'classnames'
 import axios from 'axios';
 
 class AddDataSource extends Component {
@@ -10,7 +10,7 @@ class AddDataSource extends Component {
   // @observable
   componentState = {
     urlInput: '',
-    fakeRes: ''
+    serviceData: ''
   }
 
   handleCancel = () => {
@@ -21,9 +21,12 @@ class AddDataSource extends Component {
     let response = await axios.get(this.componentState.urlInput)
     let { data } = response
     let source = { id: Date.now(), meta: { ...data }, serviceUrl: this.componentState.urlInput }
+    this.componentState.serviceData = source
+  }
 
-    this.componentState.fakeRes = <DataSource source={source} />
-
+  handlePublish = () => {
+    this.props.catalogStore.addDataSource(this.componentState.serviceData)
+    this.props.appStateStore.popState()
   }
 
   handleUrlInput = (e) => {
@@ -40,19 +43,35 @@ class AddDataSource extends Component {
         placeholder="Add URL"
         onChange={this.handleUrlInput}
       />
-      {this.componentState.fakeRes}
+
+      {this.componentState.serviceData &&
+        <DataSource
+          source={this.componentState.serviceData}
+          disablePlot={true}
+          collapsible={false}
+        />}
 
       <div className='add-data-button-container'>
         <button
+          className="tbt-button"
           onClick={this.handleCancel}
         >
           CANCEL
       </button>
-        <button
-          onClick={this.handleSubmit}
-        >
-          SUBMIT
-      </button>
+        {this.componentState.serviceData ?
+          <button
+          className="tbt-button"
+          onClick={this.handlePublish}
+          >
+          PUBLISH
+          </button>
+          : <button
+          className="tbt-button"
+            onClick={this.handleSubmit}
+          >
+            SUBMIT
+          </button>
+        }
       </div>
     </div>
   }
@@ -64,4 +83,4 @@ decorate(AddDataSource, {
 })
 
 
-export default inject("actions", "appStateStore")(observer(AddDataSource))
+export default inject("actions", "appStateStore", "catalogStore")(observer(AddDataSource))

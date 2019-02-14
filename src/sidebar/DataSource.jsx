@@ -8,7 +8,8 @@ import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
 class DataSource extends Component {
   // @observable
   componentState = {
-    expanded: false,
+    collapsible: this.props.collapsible === undefined || this.props.collapsible,
+    expanded:   !(this.props.collapsible === undefined || this.props.collapsible) || false,
     selectedSeries: [],
     selectedCheckboxes: [],
     propertyInput: '',
@@ -71,6 +72,9 @@ class DataSource extends Component {
   }
 
   toggleExpanded = () => {
+    if(!this.componentState.collapsible){
+      return
+    }
     this.componentState.expanded = !this.componentState.expanded
   }
 
@@ -101,9 +105,9 @@ class DataSource extends Component {
           <div className="card-content">
             <div className="arrow-container">
               <h2 className="card-server-name">{meta.server.name}</h2>
-              <i className="material-icons arrow-icon">
+              {this.componentState.collapsible && <i className="material-icons arrow-icon">
                 {this.componentState.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-              </i>
+              </i>}
             </div>
             <p className="card-server-description">{meta.server.description}</p>
 
@@ -150,13 +154,13 @@ class DataSource extends Component {
               /></Fragment>
             }
             <div className="tbt-button-container">
-              <button
+              {!this.props.disablePlot && <button
                 className="tbt-button"
                 onClick={this.handlePlotClick}
                 disabled={this.componentState.requestInFlight || this.componentState.selectedSeries.length === 0}
               >
                 Plot
-              </button>
+              </button>}
             </div>
           {
             this.componentState.errorMessage && 
