@@ -37,6 +37,16 @@
   color: var(--blue);
 }
 
+.data-sources{
+  /* height:100%; */
+}
+
+.data-source-cards-container{
+  /* height: 65%; */
+  /* overflow-y: scroll; */
+}
+
+
   
 .card-collapse-toggle{
   cursor: pointer;
@@ -198,8 +208,8 @@
 
 .data-source-search{
   margin: 0 0 1rem;
-  border-bottom: .2rem solid var(--blue);
   display: flex;
+  border-bottom: .2rem solid var(--blue);
   align-items: center;
 }
 
@@ -224,3 +234,20 @@
 .data-source-request-error{
   color: var(--red);
 }
+
+.add-data-source-container{
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  margin-top:2rem;
+}
+
+.add-data-source{
+  border: none;
+  background-color: var(--lightest-blue);
+  text-transform: uppercase;
+  color:var(--blue);
+  font-weight:600;
+  cursor: pointer;
+}
+

@@ -156,7 +156,7 @@ class DataSource extends Component {
                 disabled={this.componentState.requestInFlight || this.componentState.selectedSeries.length === 0}
               >
                 Plot
-                  </button>
+              </button>
             </div>
           {
             this.componentState.errorMessage && 

@@ -1,0 +1,113 @@
+import React, { Component } from 'react'
+import Plot from 'react-plotly.js';
+import './Content.css'
+import './Graph.css'
+import graphColors from '../assets/graphColors'
+import { observable, decorate, action } from 'mobx'
+import { observer, inject } from 'mobx-react'
+
+class Graph extends Component {
+  // @observable
+  plotState = {
+    // data:
+    // [{
+    //   x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    //   y: [0, 3, 6, 4, 5, 2, 3, 5, 4],
+    //   type: 'scatter',
+    //   mode: 'lines',
+    //   name: 'test1'
+    // },
+    // {
+    //   x: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    //   y: [0, 4, 7, 8, 3, 6, 3, 3, 4],
+    //   type: 'scatter',
+    //   mode: 'lines',
+    //   name: 'test2'
+    // }],
+
+    // [{
+    //   x: fakeData.initialDataSet.map(datum => new Date(datum[0])),
+    //   y: fakeData.initialDataSet.map(datum => datum[1]),
+    //   type: 'scatter',
+    //   mode: 'lines',
+    //   marker: { color: 'purple' }
+    // }, {
+    //   x: fakeData.initialDataSet.map(datum => new Date(datum[0])),
+    //   y: fakeData.initialDataSet.map(datum => datum[1]),
+    //   type: 'scatter',
+    //   mode: 'lines',
+    //   marker: { color: 'yellow' }
+    // }],
+    layout: {
+      colorway: graphColors,
+      autosize: true,
+      showlegend: true,
+      legend: { x: 0, y: 4, orientation: 'h' },
+      xaxis: {
+        // rangeselector: {buttons: [
+        //     {
+        //       count: 1,
+        //       label: '1m',
+        //       step: 'month',
+        //       stepmode: 'backward'
+        //     },
+        //     {
+        //       count: 6,
+        //       label: '6m',
+        //       step: 'month',
+        //       stepmode: 'backward'
+        //     },
+        //     {step: 'all'}
+        //   ]},
+        rangeslider: {},
+        type: 'date'
+      },
+      yaxis: {
+        type: 'linear'
+      }
+    },
+    frames: [],
+    config: { responsive: true }
+  }
+
+  handleGraphUpdate = (nextPlotState) => {
+    // this.plotState = nextPlotState
+    this.plotState.layout = nextPlotState.layout
+    this.plotState.config = nextPlotState.config
+    this.plotState.frames = nextPlotState.frames
+  }
+
+  render() {
+    let { activeDataSeries } = this.props.activeDataSeriesStore
+    // console.log("ACTIVE SERIES: ", JSON.stringify(activeDataSeries))
+
+    let data = activeDataSeries.filter(series => {
+      return series.plotlyData
+    }).map(series => {
+      return series.plotlyData
+    })
+
+    // console.log("DATA: ", JSON.stringify(data))
+
+    return (
+      <div className='graph-container'>
+        <Plot
+          className='js-plotly-plot'
+          // data={this.plotState.data}
+          data={data}
+          layout={this.plotState.layout}
+          config={this.plotState.config}
+          onUpdate={this.handleGraphUpdate}
+        />
+      </div>
+    )
+  }
+}
+
+decorate(Graph, {
+  plotState: observable,
+  handleGraphUpdate: action
+})
+
+
+export default inject("actions", "activeDataSeriesStore")(observer(Graph))
