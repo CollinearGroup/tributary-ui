@@ -23,3 +23,12 @@
   text-align: end;
   font-weight: 600;
 }
+
+.analysis-default-message{
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 2rem;
+  color: var(--mid-blue);
+  width: 100%;
+  text-align: center;
+}
