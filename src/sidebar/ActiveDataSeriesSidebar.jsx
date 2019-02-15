@@ -25,7 +25,11 @@ class ActiveDataSeriesSidebar extends Component {
         className='active-data-series'
         style={this.getBackgroundColor()}
       >
+      <React.Fragment>
         <p>{series.property.name} {series.propertyInput}</p>
+        {series.requestInFlight && 
+          <p className='active-data-series-spinner'>***</p>
+        }
         <i
           className="material-icons close-icon"
           id={series.id}
@@ -33,6 +37,7 @@ class ActiveDataSeriesSidebar extends Component {
         >
           close
         </i>
+      </React.Fragment>
       </div>)
 
   }

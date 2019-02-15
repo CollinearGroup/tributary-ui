@@ -50,16 +50,17 @@ class DataSource extends Component {
       }
 
       try {
-        this.componentState.requestInFlight = true
+        plotData.requestInFlight = true
+        // this.componentState.requestInFlight = true
         this.componentState.errorMessage = ''
-        await this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
+        this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
 
         this.componentState.propertyInput = ''
         this.componentState.enumInput = ''
         this.componentState.selectedSeries = []
-        this.componentState.requestInFlight = false
+        // this.componentState.requestInFlight = false
       } catch (err) {
-        this.componentState.requestInFlight = false
+        // this.componentState.requestInFlight = false
         this.componentState.errorMessage = "Unable to retrieve data."
         console.error("datasource err", err)
       }

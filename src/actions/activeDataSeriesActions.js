@@ -14,6 +14,10 @@ async function getSeriesData(url) {
 }
 
 export async function addActiveDataSeries(store, seriesInfo) {
+  //Add the series to the store right away
+  const nextDataSeries = [...store.activeDataSeries, seriesInfo]
+  store.setActiveDataSeries(nextDataSeries)
+
   if (!seriesInfo.plotlyData) {
     let url = `${seriesInfo.serviceUrl}/api/${seriesInfo.property.key}`
     if (seriesInfo.propertyInput) {
@@ -23,9 +27,6 @@ export async function addActiveDataSeries(store, seriesInfo) {
 
     console.log("Requesting data from: ", url)
     let seriesData = await getSeriesData(url)
-
-    //Inject some fake data
-    //TODO extract to some utility
 
     seriesInfo.plotlyData = {
       x: seriesData.initialDataSet.map(v => v[0]),
@@ -39,10 +40,21 @@ export async function addActiveDataSeries(store, seriesInfo) {
       // marker: { color: 'purple' },
     }
 
+    //Update the store and remove the 'inFlight' flag for this data
+    seriesInfo.requestInFlight = false
+
+    //Replace the series info in the store
+    let currentSeriesInStore = store.activeDataSeries.filter(it => it.id === seriesInfo.id)
+
+    if (currentSeriesInStore.length) {
+      let filteredDataSeries = store.activeDataSeries.filter(it => it.id !== seriesInfo.id)
+
+      let nextDataSeries = [...filteredDataSeries, seriesInfo]
+      store.setActiveDataSeries(nextDataSeries)
+    } else {
+      console.warn("Request finished, but series not found in store")
+    }
   }
-  // console.log("ADDING: ", JSON.stringify(seriesInfo))
-  const nextDataSeries = [...store.activeDataSeries, seriesInfo]
-  store.setActiveDataSeries(nextDataSeries)
 
   return true
 }
