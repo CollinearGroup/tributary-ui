@@ -9,6 +9,9 @@
 .tab-content{
   padding: 1.5rem;
   background-color:var(--lightest-blue);
+  height: calc(100vh - 10rem);
+  padding-bottom: 3rem;
+  overflow-y: auto;
 }
 
 .tab-list{
@@ -176,7 +179,6 @@
   padding: 0;
   margin: 0;
   vertical-align: bottom;
-  /* top: .1rem; */
   left: 0;
 }
 
@@ -185,7 +187,6 @@
   margin-bottom: 1.5rem;
   height: 3.2rem;
   padding: 1rem;
-  /* border-color: var(--light-blue) */
 }
 
 .tbt-button-container{
@@ -205,6 +206,7 @@
   font-size: 1rem;
   font-weight: 600;
 }
+
 .tbt-button:disabled{
   background-color: var(--light-blue);
 }
@@ -240,14 +242,23 @@
 
 .add-data-source-container{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-self: flex-end;
-  margin-top:2rem;
+  padding: 1rem 0 1rem 2rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34rem;
+  text-align: right;
+  /* height: 3rem; */
+  background-color: var(--lightest-blue);
 }
 
 .add-data-source{
-  border: none;
+  /* border: none; */
+  border: .1rem solid var(--light-blue);
   background-color: var(--lightest-blue);
+  height: 2rem;
   text-transform: uppercase;
   color:var(--blue);
   font-weight:600;

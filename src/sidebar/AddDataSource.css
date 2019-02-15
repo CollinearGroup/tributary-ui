@@ -1,0 +1,39 @@
+.add-data-source-sidebar-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1rem;
+}
+/* 'add-data-source-form-container' */
+.add-data-source-header{
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.add-data-source-label{
+  display: block;
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.add-data-source-url-input{
+  width: 100%;
+  height: 3.2rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-data-button-container{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-data-button-container .cancel-button{
+  margin-right: 1rem;
+}
