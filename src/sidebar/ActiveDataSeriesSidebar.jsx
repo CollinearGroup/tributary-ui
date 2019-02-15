@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import graphColors from '../assets/graphColors'
+import Loader from 'react-loader-spinner'
 class ActiveDataSeriesSidebar extends Component {
 
   handleCloseClick = (e) => {
@@ -8,13 +9,13 @@ class ActiveDataSeriesSidebar extends Component {
   }
 
   getBackgroundColor = () => {
-    const {id} = this.props.series
-    const {activeDataSeries} = this.props.activeDataSeriesStore
+    const { id } = this.props.series
+    const { activeDataSeries } = this.props.activeDataSeriesStore
     let index
-    activeDataSeries.forEach((series, i) =>{
-      if(series.id === id) index = i
+    activeDataSeries.forEach((series, i) => {
+      if (series.id === id) index = i
     })
-    return {backgroundColor: graphColors[index]}
+    return { backgroundColor: graphColors[index] }
   }
 
   render() {
@@ -25,11 +26,18 @@ class ActiveDataSeriesSidebar extends Component {
         className='active-data-series'
         style={this.getBackgroundColor()}
       >
-      <React.Fragment>
+      {series.requestInFlight &&
+        <div className='active-data-series-spinner'>
+          <Loader
+            type="Oval"
+            color="#fff"
+            height="20"
+            width="20"
+          />
+        </div>
+      }
         <p>{series.property.name} {series.propertyInput}</p>
-        {series.requestInFlight && 
-          <p className='active-data-series-spinner'>***</p>
-        }
+        
         <i
           className="material-icons close-icon"
           id={series.id}
@@ -37,7 +45,6 @@ class ActiveDataSeriesSidebar extends Component {
         >
           close
         </i>
-      </React.Fragment>
       </div>)
 
   }
