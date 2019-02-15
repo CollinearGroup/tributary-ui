@@ -24,9 +24,7 @@ class DataSource extends Component {
         sourceId: this.props.source.id,
         sourceName: this.props.source.meta.server.name,
         serviceUrl: this.props.source.serviceUrl,
-        propertyInput: this.componentState.enumInput ? this.componentState.enumInput : this.componentState.propertyInput,
-        name: `${this.props.source.id}-${selectedProperty}-${this.componentState.propertyInput}`,
-        // propertyInput: this.componentState.propertyInput,
+        propertyInput: this.componentState.propertyInput,
         property: {
           key: selectedProperty,
           name: this.props.source.meta.availableDataSeries[selectedProperty].name
