@@ -92,6 +92,73 @@ export const data = [
         "status": {}
     },
     {
+        "id": "SidewalkCafe",
+        "meta": {
+            "server": {
+                "name": "Seattle Sidewalk Cafe Applications",
+                "apiVersion": "0.2",
+                "baseUrl": 'https://data.seattle.gov/resource/evxa-pai5.json',
+                "attribution": {
+                    "logo": '/logo.png', //This will be dynamically set to a fully qualified url based on the request headers
+                    "link": 'https://data.seattle.gov/'
+                }
+            },
+            "availableDataSeries": {
+                "status_approved": {
+                    "name": "Approved",
+                    "description": "Approved applications for sidewalk cafes"
+                },
+                "status_commented_on": {
+                    "name": "Commented On",
+                    "description": "Commented on applications not yet approved"
+                }
+            }
+        },
+        "serviceUrl": "http://localhost:3005",
+        "status": {}
+    },
+    {
+        "id": "roadWeather",
+        "meta": {
+            "server": {
+                "name": "Seattle Road Weather",
+                "apiVersion": "0.2",
+                "baseUrl": ' https://data.seattle.gov/resource/ivtm-938t.json',
+                "attribution": {
+                    "logo": '/logo.png', //This will be dynamically set to a fully qualified url based on the request headers
+                    "link": 'https://data.seattle.gov/'
+                }
+            },
+            "availableDataSeries": {
+                "stationname": {
+                    "name": "Location",
+                    "description": "Station location",
+                    "attributes": {
+                        "location": {
+                            "name": "location",
+                            "description": "Bridge or Street",
+                            "type": "selection",
+                            "selectionList": [
+                                "Albro Place Airport Way",
+                                "Magnolia Bridge",
+                                "Harbor Ave Upper North Bridge",
+                                "NE 45 St Viaduct",
+                                "Aurora Bridge",
+                                '35th Ave SW MyrtleSt',
+                                "Roosevelt Way NE 80th St",
+                                "Spokane Swing Bridge",
+                                "Jose Rizal Bridge North",
+                                "Alaskan Way Viaduct King St"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "serviceUrl": "http://localhost:3006",
+        "status": {}
+    },
+    {
         "id": "census",
         "meta": {
             "server": {

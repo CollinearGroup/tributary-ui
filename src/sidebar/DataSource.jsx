@@ -4,12 +4,12 @@ import { observable, action, decorate } from 'mobx'
 import defaultDataSourceLog from '../logo.svg'
 import cx from 'classnames'
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
-
+import isEmpty from 'lodash.isempty'
 class DataSource extends Component {
   // @observable
   componentState = {
     collapsible: this.props.collapsible === undefined || this.props.collapsible,
-    expanded:   !(this.props.collapsible === undefined || this.props.collapsible) || false,
+    expanded: !(this.props.collapsible === undefined || this.props.collapsible) || false,
     selectedSeries: [],
     selectedCheckboxes: [],
     propertyInput: '',
@@ -24,7 +24,9 @@ class DataSource extends Component {
         sourceId: this.props.source.id,
         sourceName: this.props.source.meta.server.name,
         serviceUrl: this.props.source.serviceUrl,
-        propertyInput: this.componentState.propertyInput,
+        propertyInput: this.componentState.enumInput ? this.componentState.enumInput : this.componentState.propertyInput,
+        name: `${this.props.source.id}-${selectedProperty}-${this.componentState.propertyInput}`,
+        // propertyInput: this.componentState.propertyInput,
         property: {
           key: selectedProperty,
           name: this.props.source.meta.availableDataSeries[selectedProperty].name
@@ -32,7 +34,7 @@ class DataSource extends Component {
       }
 
       plotData.name = `${plotData.sourceName} - ${plotData.property.name}`
-      if(plotData.propertyInput) {
+      if (plotData.propertyInput) {
         plotData.name += ` - ${plotData.propertyInput}`
       }
 
@@ -42,21 +44,22 @@ class DataSource extends Component {
       }
 
       //Look in the store for a duplicate name and prevent it from adding
-      for(let ser of this.props.activeDataSeriesStore.activeDataSeries) {
-        if(ser.name === plotData.name) {
+      for (let ser of this.props.activeDataSeriesStore.activeDataSeries) {
+        if (ser.name === plotData.name) {
           this.componentState.errorMessage = 'Sorry, the data you selected is already ploted.'
           return
         }
       }
-    
+
       try {
         this.componentState.requestInFlight = true
         this.componentState.errorMessage = ''
         await this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
-        
+
         this.componentState.propertyInput = ''
+        this.componentState.enumInput = ''
         this.componentState.selectedSeries = []
-        this.componentState.requestInFlight = false        
+        this.componentState.requestInFlight = false
       } catch (err) {
         this.componentState.requestInFlight = false
         this.componentState.errorMessage = "Unable to retrieve data."
@@ -84,11 +87,26 @@ class DataSource extends Component {
     this.componentState.propertyInput = e.target.value
   }
 
+  handleEnumInputChange = (e) => {
+    this.componentState.enumInput = e.target.value
+  }
+
   toggleExpanded = () => {
-    if(!this.componentState.collapsible){
+    if (!this.componentState.collapsible) {
       return
     }
     this.componentState.expanded = !this.componentState.expanded
+  }
+
+  determineDataSeriesInput = (dataSeriesProps) => {
+    let input = dataSeriesProps ? dataSeriesProps[Object.keys(dataSeriesProps)[0]] : {}
+    if (!isEmpty(dataSeriesProps)
+      && dataSeriesProps.location
+      && dataSeriesProps.location.selectionList) {
+
+      input = dataSeriesProps.location.selectionList
+    }
+    return input
   }
 
   render() {
@@ -96,8 +114,8 @@ class DataSource extends Component {
     let logo = meta.server.attribution.logo
 
     let dataSeriesProps = meta.availableDataSeries[Object.keys(meta.availableDataSeries)[0]].attributes
-    let dataSeriesInput = dataSeriesProps ? dataSeriesProps[Object.keys(dataSeriesProps)[0]] : {}
-
+    let dataSeriesInput = this.determineDataSeriesInput(dataSeriesProps)
+    let isEnum = dataSeriesInput.length
     let plottedSeries = []
     this.props.activeDataSeriesStore.activeDataSeries.forEach(series => {
       if (series.sourceId === this.props.source.id) {
@@ -133,7 +151,7 @@ class DataSource extends Component {
           expanded: this.componentState.expanded
         })}>
           <div className="collapsible-content-inner">
-            {dataSeriesProps && <Fragment>
+            {!isEnum && dataSeriesProps && <Fragment>
               <label className="tbt-form-label">{dataSeriesInput.name}</label>
               <input
                 className="tbt-form-input"
@@ -145,6 +163,21 @@ class DataSource extends Component {
                 disabled={this.componentState.requestInFlight}
               /></Fragment>
             }
+            {isEnum && <Fragment>
+              <select
+                onChange={this.handlePropertyInputChange}
+                name="locations">
+                {dataSeriesInput.map(location => {
+                  return <option
+                    key={location}
+                    value={location}
+                  >
+                    {location}
+                  </option>
+                })}
+              </select>
+            </Fragment>}
+
             <div className="checkbox-group">
 
               {/* <h3 className="tbt-form-label">Properties</h3> */}
@@ -175,10 +208,10 @@ class DataSource extends Component {
                 Plot
               </button>}
             </div>
-          {
-            this.componentState.errorMessage && 
-            <div className="data-source-request-error">{this.componentState.errorMessage}</div>
-          }
+            {
+              this.componentState.errorMessage &&
+              <div className="data-source-request-error">{this.componentState.errorMessage}</div>
+            }
           </div>
         </div>
       </div>)

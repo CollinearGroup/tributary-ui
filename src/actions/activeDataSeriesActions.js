@@ -31,6 +31,10 @@ export async function addActiveDataSeries(store, seriesInfo) {
       x: seriesData.initialDataSet.map(v => v[0]),
       y: seriesData.initialDataSet.map(v => v[1]),
       name: seriesInfo.name,
+      // type will default to scatter unless the type is added in the initialDataSet index 3
+      type: seriesData.initialDataSet[0][3] ? seriesData.initialDataSet[0][3].type : 'scatter',
+      // text is for additional info on hover over the graph points
+      text : seriesData.initialDataSet[0][2] ? seriesData.initialDataSet.map(v => v[2]) :'',
       // seriesId: seriesInfo.id
       // marker: { color: 'purple' },
     }
