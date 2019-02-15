@@ -40,6 +40,14 @@ class DataSource extends Component {
       if (this.props.source.meta.availableDataSeries[selectedProperty].attributes) {
         plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)[0]
       }
+
+      //Look in the store for a duplicate name and prevent it from adding
+      for(let ser of this.props.activeDataSeriesStore.activeDataSeries) {
+        if(ser.name === plotData.name) {
+          this.componentState.errorMessage = 'Sorry, the data you selected is already ploted.'
+          return
+        }
+      }
     
       try {
         this.componentState.requestInFlight = true
