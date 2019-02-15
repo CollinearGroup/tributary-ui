@@ -14,7 +14,6 @@ class DataSource extends Component {
     selectedCheckboxes: [],
     propertyInput: '',
     errorMessage: '',
-    requestInFlight: false
   }
 
   handlePlotClick = (e) => {
@@ -51,20 +50,16 @@ class DataSource extends Component {
 
       try {
         plotData.requestInFlight = true
-        // this.componentState.requestInFlight = true
         this.componentState.errorMessage = ''
         this.props.actions.addActiveDataSeries(this.props.activeDataSeriesStore, plotData)
 
-        this.componentState.propertyInput = ''
-        this.componentState.enumInput = ''
-        this.componentState.selectedSeries = []
-        // this.componentState.requestInFlight = false
       } catch (err) {
-        // this.componentState.requestInFlight = false
         this.componentState.errorMessage = "Unable to retrieve data."
         console.error("datasource err", err)
       }
     })
+    this.componentState.propertyInput = ''
+    this.componentState.selectedSeries = []
   }
 
   handleCheckboxClick = (e) => {
@@ -84,10 +79,6 @@ class DataSource extends Component {
 
   handlePropertyInputChange = (e) => {
     this.componentState.propertyInput = e.target.value
-  }
-
-  handleEnumInputChange = (e) => {
-    this.componentState.enumInput = e.target.value
   }
 
   toggleExpanded = () => {
@@ -159,7 +150,6 @@ class DataSource extends Component {
                 name={`${meta.server.name}-search-terms`}
                 placeholder={dataSeriesInput.description}
                 onChange={this.handlePropertyInputChange}
-                disabled={this.componentState.requestInFlight}
               /></Fragment>
             }
             {isEnum && <Fragment>
@@ -192,7 +182,6 @@ class DataSource extends Component {
                       checked={this.componentState.selectedSeries.includes(series)}
                       name={property}
                       onChange={this.handleCheckboxClick}
-                      disabled={this.componentState.requestInFlight}
                     />
                   </label>
                 </div>)
@@ -202,7 +191,7 @@ class DataSource extends Component {
               {!this.props.disablePlot && <button
                 className="tbt-button"
                 onClick={this.handlePlotClick}
-                disabled={this.componentState.requestInFlight || this.componentState.selectedSeries.length === 0}
+                disabled={this.componentState.selectedSeries.length === 0}
               >
                 Plot
               </button>}
