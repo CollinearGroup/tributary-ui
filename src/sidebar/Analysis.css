@@ -2,14 +2,14 @@
   font-weight: 600;
   font-size: 1.5rem;
   padding-bottom: 1.2rem;
-  color: var(--blue);
+  color: var(--light);
 }
 
 .analysis-card-series{
   display: flex;
   justify-content: space-between;
   padding-bottom: .7rem;
-  color: var(--blue);
+  color: var(--light);
 }
 
 .analysis-card-series-name{
@@ -28,7 +28,7 @@
   font-weight: 600;
   font-size: 2rem;
   padding: 2rem;
-  color: var(--mid-blue);
+  color: var(--light-grey-2);
   width: 100%;
   text-align: center;
 }

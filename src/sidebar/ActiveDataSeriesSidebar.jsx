@@ -12,7 +12,7 @@ class ActiveDataSeriesSidebar extends Component {
     const { id } = this.props.series
     const { activeDataSeries } = this.props.activeDataSeriesStore
     let index
-    activeDataSeries.forEach((series, i) => {
+    activeDataSeries.filter(ser => ser.plotlyData).forEach((series, i) => {
       if (series.id === id) index = i
     })
     return { backgroundColor: graphColors[index] }
@@ -22,22 +22,25 @@ class ActiveDataSeriesSidebar extends Component {
 
     let { series } = this.props
     return (
-      <div
-        className='active-data-series'
-        style={this.getBackgroundColor()}
-      >
-      {series.requestInFlight &&
-        <div className='active-data-series-spinner'>
-          <Loader
-            type="Oval"
-            color="#fff"
-            height="20"
-            width="20"
-          />
+      <div className='active-data-series' >
+        <div className='active-data-series-marker'>
+          {series.requestInFlight ?
+            <div className='active-data-series-spinner'>
+              <Loader
+                type="Oval"
+                color="#fff"
+                height="20"
+                width="20"
+              />
+            </div>
+            : <div
+              className='active-data-series-line'
+              style={this.getBackgroundColor()}
+            />
+          }
+          <p>{series.property.name} {series.propertyInput}</p>
         </div>
-      }
-        <p>{series.property.name} {series.propertyInput}</p>
-        
+
         <i
           className="material-icons close-icon"
           id={series.id}

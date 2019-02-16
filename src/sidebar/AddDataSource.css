@@ -9,7 +9,7 @@
 .add-data-source-header{
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--blue);
+  color: var(--light);
 }
 
 .add-data-source-label{
@@ -18,7 +18,7 @@
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--blue);
+  color: var(--light);
 }
 
 .add-data-source-url-input{
@@ -26,6 +26,13 @@
   height: 3.2rem;
   padding: 1rem;
   margin-bottom: 1rem;
+  background-color: transparent;
+  border: .1rem solid var(--light-grey-1);
+  color: var(--light);
+  font-size: 1.2rem;
+}
+.add-data-source-url-input::placeholder{
+  color: var(--light-grey-2);
 }
 
 .add-data-button-container{
@@ -36,4 +43,14 @@
 
 .add-data-button-container .cancel-button{
   margin-right: 1rem;
+  background-color: transparent;
+  border: .1rem solid var(--light-grey-1);
+  color: var(--light-grey-1);
+}
+
+
+.add-data-button-container .cancel-button:hover{
+  cursor: pointer;
+  background-color: var(--light-grey-2);
+  color: var(--light);
 }

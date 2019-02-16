@@ -1,6 +1,6 @@
 .nav-container{
   width:100%;
-  background-color: var(--blue);
+  background-color: var(--grey-1);
   height:6rem;
   position: absolute;
   display: flex;
@@ -10,6 +10,7 @@
   color: white;
   font-weight: 600;
   font-size: 2rem;
+  border-bottom: .1rem solid var(--light-grey-2);
 }
 
 .nav-collinear-logo{

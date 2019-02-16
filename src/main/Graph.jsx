@@ -14,7 +14,14 @@ class Graph extends Component {
       autosize: true,
       showlegend: true,
       legend: { x: 0, y: 4, orientation: 'h' },
+      plot_bgcolor: '#383e45',
+      paper_bgcolor: '#22252a',
+      font: {
+        color: '#fefefe'
+      },
+      height: '600',
       xaxis: {
+        gridcolor: '#898e91',
         // rangeselector: {buttons: [
         //     {
         //       count: 1,
@@ -34,6 +41,8 @@ class Graph extends Component {
         type: 'date'
       },
       yaxis: {
+        zerolinecolor: '#898e91',
+        gridcolor: '#898e91',
         type: 'linear'
       }
     },
@@ -70,7 +79,6 @@ class Graph extends Component {
           config={this.plotState.config}
           onUpdate={this.handleGraphUpdate}
           onHover={e => { 
-            // console.log("HOVER: ", JSON.stringify(e.points[0].data))
             this.props.activeDataSeriesStore.setHoverData(e.points.map(pt => {
               return {
                 name: pt.data.name,
