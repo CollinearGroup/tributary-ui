@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Nav.css'
-import collinearLogo from '../assets/CollinearDataLogo.png'
+// import collinearLogo from '../assets/CollinearDataLogo.png'
 import tributaryLogo from '../assets/tributary-logo.svg'
 
 // import {Link} from 'react-router'
