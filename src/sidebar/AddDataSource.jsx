@@ -66,6 +66,11 @@ class AddDataSource extends Component {
             onChange={this.handleUrlInput}
             disabled={this.componentState.serviceData}
           />
+          {this.componentState.urlRequestError &&
+            <div className='data-source-request-error'>
+              {this.componentState.urlRequestError}
+            </div>
+          }
 
           {this.componentState.serviceData &&
             <DataSource
@@ -96,11 +101,6 @@ class AddDataSource extends Component {
             >
               SUBMIT
           </button>
-          }
-          {this.componentState.urlRequestError &&
-            <div className='data-source-request-error'>
-              {this.componentState.urlRequestError}
-            </div>
           }
         </div>
       </div>

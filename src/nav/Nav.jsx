@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import './Nav.css'
 import collinearLogo from '../assets/CollinearDataLogo.png'
+import tributaryLogo from '../assets/tributary-logo.svg'
+
+// import {Link} from 'react-router'
 export default class Nav extends Component {
 
   handleContact = (e) => {
@@ -12,27 +15,7 @@ export default class Nav extends Component {
     return (
       <div>
         <div className='nav-container'>
-          <a
-            target='_blank'
-            rel="noopener noreferrer"
-            href='https://www.collineargroup.com/'
-          >
-            <img src={collinearLogo} alt='logo' className='nav-collinear-logo' />
-          </a>
-          { <div
-            className="nav-item"
-            value={"main"}
-            onClick={this.handleContact}
-          >
-            Tributary
-          </div>
-          /*<div
-            className="nav-item"
-            value={"contact"}
-            onClick={this.handleContact}
-          >
-            CONTACT
-          </div> */}
+            <img src={tributaryLogo} alt='logo' className='nav-collinear-logo' />
         </div>
       </div>
     )

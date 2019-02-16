@@ -158,6 +158,7 @@ export const data = [
     //     "serviceUrl": "http://localhost:3006",
     //     "status": {}
     // },
+
     {
         "id": "census",
         "meta": {
@@ -184,5 +185,25 @@ export const data = [
         },
         "serviceUrl": "http://snickerdoodle.collineargroup.com:3005",
         "status": {}
+    },
+    {
+        "id": "nrel",
+        meta: {
+            "server": {
+                "name": "NREL Api",
+                "apiVersion": "0.2",
+                "description": "Solar photovoltaic array infromation from nrel.gov",
+                "attribution": {
+                    "link": "http://www.nrel.gov"
+                }
+            },
+            "availableDataSeries": {
+                "array_yield": {
+                    "name": "Golden Solar Array Yield",
+                    "description": "Solar array yield for a location in Golden, CO"
+                }
+            }
+        },
+        "serviceUrl": "http://tributary.collineargroup.com:3009"
     }
 ]

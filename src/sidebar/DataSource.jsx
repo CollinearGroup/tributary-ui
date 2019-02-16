@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react'
 import { observable, action, decorate } from 'mobx'
-import defaultDataSourceLog from '../logo.svg'
+import defaultDataSourceLog from '../assets/tributary-logo.svg'
 import cx from 'classnames'
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
 import isEmpty from 'lodash.isempty'
@@ -17,6 +17,7 @@ class DataSource extends Component {
   }
 
   handlePlotClick = (e) => {
+    this.componentState.errorMessage = ''
     this.componentState.selectedSeries.forEach(async selectedProperty => {
       let plotData = {
         id: `${Date.now()}-${selectedProperty}`,
@@ -43,7 +44,7 @@ class DataSource extends Component {
       //Look in the store for a duplicate name and prevent it from adding
       for (let ser of this.props.activeDataSeriesStore.activeDataSeries) {
         if (ser.name === plotData.name) {
-          this.componentState.errorMessage = 'Sorry, the data you selected is already ploted.'
+          this.componentState.errorMessage = 'Sorry, the data you selected is already plotted.'
           return
         }
       }

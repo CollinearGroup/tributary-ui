@@ -61,7 +61,7 @@ html {
   --mid-blue: #7fc4fd;
   --light-blue: #bce0fd;
   --lightest-blue: #f1f9ff;
-  --red: red;
+  --red: #f06047;
 
   --light: #fefefe;
   --dark: #22252a;
@@ -76,6 +76,7 @@ html {
 
 body {
   height:100%;
+  background-color: var(--dark);
 }
 
  #root{

@@ -265,6 +265,8 @@
 
 .data-source-request-error{
   color: var(--red);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 .add-data-source-container{
