@@ -5,11 +5,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "lodash.isempty": "^4.4.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
-    "plotly.js": "^1.44.3",
+    "plotly.js": "^1.44.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-loader-spinner": "^2.3.0",
     "react-plotly.js": "^2.2.0",
     "react-scripts": "2.1.3"
   },

@@ -61,12 +61,24 @@ html {
   --mid-blue: #7fc4fd;
   --light-blue: #bce0fd;
   --lightest-blue: #f1f9ff;
-  --red: red;
+  --red: #f06047;
+
+  --light: #fefefe;
+  --dark: #22252a;
+
+  --light-grey-1: #898e91;
+  --light-grey-2: #62686e;
+  --grey-1: #383e45;
+  --grey-2: #2c3137;
+
+  --teal: #00dbdc;
 }
 
 body {
   height:100%;
+  background-color: var(--dark);
 }
+
  #root{
    height:100%;
  }
