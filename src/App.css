@@ -57,10 +57,6 @@ html {
   font-size: 62.5%;
   font-family: Arial, Helvetica, sans-serif;
   height:100vh;
-  --blue: #2699fb;
-  --mid-blue: #7fc4fd;
-  --light-blue: #bce0fd;
-  --lightest-blue: #f1f9ff;
   --red: #f06047;
 
   --light: #fefefe;

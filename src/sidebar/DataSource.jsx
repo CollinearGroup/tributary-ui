@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react'
-import { observer, inject } from 'mobx-react'
-import { observable, action, decorate } from 'mobx'
-import defaultDataSourceLog from '../assets/tributary-logo.svg'
-import cx from 'classnames'
+import React, { Component, Fragment } from 'react';
+import { observer, inject } from 'mobx-react';
+import { observable, action, decorate } from 'mobx';
+import defaultDataSourceLogo from '../assets/tributary-avatar.svg';
+import cx from 'classnames';
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
-import isEmpty from 'lodash.isempty'
+import isEmpty from 'lodash.isempty';
+
 class DataSource extends Component {
   // @observable
   componentState = {
@@ -122,7 +123,7 @@ class DataSource extends Component {
       <div className="card">
         <div className='card-collapse-toggle' onClick={this.toggleExpanded}>
           <div className="card-img-container">
-            <img className="card-img" src={logo || defaultDataSourceLog} alt="Data Source Logo" />
+            <img className="card-img" src={logo || defaultDataSourceLogo} alt="Data Source Logo" />
           </div>
           <div className="card-content">
             <div className="arrow-container">
