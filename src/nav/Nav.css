@@ -15,8 +15,14 @@
 .nav-collinear-logo{
   height: 6rem;
   padding: 1.2rem;
-  width: 36rem;
+  width: 100%;
   background-color: var(--light-grey-2);
+}
+
+@media (min-width: 600px) {
+  .nav-collinear-logo{
+    width: 36rem;
+  }
 }
 
 .nav-item{

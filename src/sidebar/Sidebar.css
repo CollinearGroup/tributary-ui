@@ -1,8 +1,16 @@
 .sidebar-container{
   min-width:36rem;
-  width: 36rem;
+  /* width: 36rem; */
+  width: 100%;
   height:100%;
   background-color: var(--grey-2);
+}
+
+
+@media (min-width: 600px) {
+  .sidebar-container{
+    width: 36rem;
+  }
 }
 
 .tab-content{

@@ -16,6 +16,7 @@ class Graph extends Component {
       legend: { x: 0, y: 4, orientation: 'h' },
       plot_bgcolor: '#383e45',
       paper_bgcolor: '#22252a',
+      margin: { l: 50, r: 50, t: 50 },
       font: {
         color: '#fefefe'
       },
