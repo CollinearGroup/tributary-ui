@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable, action, decorate } from 'mobx';
 import defaultDataSourceLogo from '../assets/tributary-avatar.svg';
 import cx from 'classnames';
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
 import isEmpty from 'lodash.isempty';
+import DataSourcePropertyInput from './DataSourcePropertyInput';
 
 class DataSource extends Component {
   // @observable
@@ -95,7 +96,6 @@ class DataSource extends Component {
     if (!isEmpty(dataSeriesProps)
       && dataSeriesProps.location
       && dataSeriesProps.location.selectionList) {
-
       input = dataSeriesProps.location.selectionList
     }
     return input
@@ -107,7 +107,6 @@ class DataSource extends Component {
 
     let dataSeriesProps = meta.availableDataSeries[Object.keys(meta.availableDataSeries)[0]].attributes
     let dataSeriesInput = this.determineDataSeriesInput(dataSeriesProps)
-    let isEnum = dataSeriesInput.length
     let plottedSeries = []
     this.props.activeDataSeriesStore.activeDataSeries.forEach(series => {
       if (series.sourceId === this.props.source.id) {
@@ -143,31 +142,8 @@ class DataSource extends Component {
           expanded: this.componentState.expanded
         })}>
           <div className="collapsible-content-inner">
-            {!isEnum && dataSeriesProps && <Fragment>
-              <label className="tbt-form-label">{dataSeriesInput.name}</label>
-              <input
-                className="tbt-form-input"
-                type="text"
-                value={this.componentState.propertyInput}
-                name={`${meta.server.name}-search-terms`}
-                placeholder={dataSeriesInput.description}
-                onChange={this.handlePropertyInputChange}
-              /></Fragment>
-            }
-            {isEnum && <Fragment>
-              <select
-                onChange={this.handlePropertyInputChange}
-                name="locations">
-                {dataSeriesInput.map(location => {
-                  return <option
-                    key={location}
-                    value={location}
-                  >
-                    {location}
-                  </option>
-                })}
-              </select>
-            </Fragment>}
+
+            <DataSourcePropertyInput property={dataSeriesInput} onChange={this.handlePropertyInputChange} />
 
             <div className="checkbox-group">
 
