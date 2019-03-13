@@ -5,10 +5,15 @@ import Graph from './Graph.jsx'
 import { observable, decorate, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 import AddDataSourceContent from './AddDataSourceContent';
+import { Splash } from './Splash'
 
 class Content extends Component {
 
   renderContent = () => {
+
+    let { activeDataSeries } = this.props.activeDataSeriesStore
+    if(!activeDataSeries.length) return <Splash />
+
     switch (this.props.appStateStore.contentState) {
       case 'addDataSource':
         return <AddDataSourceContent />
@@ -29,8 +34,9 @@ class Content extends Component {
 
 decorate(Content, {
   contentState: observable,
+  activeDataSeriesStore: observer,
   handleGraphUpdate: action
 })
 
 
-export default inject("actions", "appStateStore")(observer(Content))
+export default inject("actions", "appStateStore", "activeDataSeriesStore")(observer(Content))
