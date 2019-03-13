@@ -1,13 +1,122 @@
-.main-container {
-  display:flex;
+.main-container,
+.splash-container {
+  display: flex;
   flex-direction: column;
-  height:100%;
-  width:100%;
-  padding-top:6rem;
-} 
+  height: 100%;
+  width: 100%;
+  padding-top: 6rem;
+}
 
-@media (min-width: 600px) {
+.splash-container {
+  align-items: center;
+  padding-top: 12rem;
+}
+
+.vertical-logo {
+  width: 90%;
+}
+
+.tagline {
+  color: var(--light-grey-1);
+  font-family: 'Roboto Condensed';
+  font-size: 2.1rem;
+  margin-bottom: 6rem;
+  margin-top: 1.5rem;
+}
+
+.details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+  padding: 0 3rem;
+  width: 100%;
+}
+
+.detail-card {
+  align-items: center;
+  background-color: var(--grey-2);
+  color: var(--light);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  padding: 5rem 3rem;
+  width: calc(100% - 6rem);
+}
+
+.detail-card-icon {
+  margin-bottom: 4rem;
+  width: 10rem;
+}
+
+.detail-card-header {
+  font-family: 'Roboto Condensed';
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.detail-card-text {
+  color: var(--light-grey-1);
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.starter-text {
+  color: var(--light);
+  font-family: 'Roboto Condensed';
+  font-size: 1.8rem;
+}
+
+.attribution-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 9rem;
+}
+
+.attribution-text {
+  color: var(--light-grey-1);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.attribution-logo {
+  width: 15rem;
+}
+
+@media (min-width: 60rem) {
   .main-container {
     flex-direction: row;
+  }
+
+  .splash-container {
+    padding-top: 6rem;
+  }
+
+  .vertical-logo {
+    width: 45rem;
+  }
+
+  .details-container {
+    align-items: stretch;
+    flex-direction: row;
+    max-width: 96rem;
+  }
+
+  .detail-card {
+    margin-bottom: 0;
+    width: calc(33% - 1.5rem);
+  }
+}
+
+@media (min-width: 137rem) {
+  .details-container {
+    align-items: default;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
