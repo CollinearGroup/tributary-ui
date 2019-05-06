@@ -18,7 +18,13 @@ class Sidebar extends Component {
   }
 
   render() {
-    let { dataSources } = this.props.catalogStore
+    let { dataSources, state, fetchCatalogSources } = this.props.catalogStore
+
+    //initialize or update CatalogSources
+    if(state === "pending"){
+      fetchCatalogSources()
+    }
+    
     return <div>
       {this.props.appStateStore.contentState === 'addDataSource' ?
 
