@@ -5,6 +5,15 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
   if (!property || !property.name) {
     return null
   }
+
+  const sortOptions = (options) => {
+    //chart duration options are already in order
+    if(property.name === "chart duration"){
+      return options
+    }
+    return options.sort()
+  }
+
   switch (property.type) {
     case 'select-map':
       input = <select
@@ -12,18 +21,16 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
         className="tbt-form-input"
         name={`${serviceName}-prop-select`}
         value={currentValue}>
-        {Object.keys(property.values).sort((a,b) => {
-          const A = property.values[a]
-          const B = property.values[b]
-          return A < B ? -1 : A > B ? 1 : 0
-        }).map(key => {
-          return <option
-            key={key}
-            value={key}
-          >
-            {property.values[key]}
-          </option>
-        })}
+        {
+          sortOptions(Object.keys(property.values))
+          .map(key => {
+          return (
+            <option key={key} value={key}>
+              {property.values[key]}
+            </option>
+            )
+          })
+        }
       </select>
       break;
     default:

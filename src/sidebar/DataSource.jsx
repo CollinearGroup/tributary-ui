@@ -86,7 +86,6 @@ class DataSource extends Component {
     //the name of the input is formatted as property-input-type
     let property = e.target.name.split('-')[0]
     this.componentState.propertyInput[property] = e.target.value
-    console.log(this.componentState.propertyInput)
   }
 
   toggleExpanded = () => {
