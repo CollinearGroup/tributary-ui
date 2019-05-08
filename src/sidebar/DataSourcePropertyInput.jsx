@@ -15,6 +15,7 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
         value={currentValue}>
         {
           Object.keys(property.values)
+          .sort()
           .map(key => {
           return (
             <option key={key} value={key}>
