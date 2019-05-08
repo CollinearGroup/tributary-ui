@@ -26,7 +26,6 @@ class ActiveDataSeriesSidebar extends Component {
       propertyInputString += ` - ${value}`
     })
 
-    console.log(series.propertyInput)
     return (
       <div className='active-data-series' >
         <div className='active-data-series-marker'>
