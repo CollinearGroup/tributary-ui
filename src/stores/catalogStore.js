@@ -17,11 +17,13 @@ class CatalogStore {
     this.dataSources = []
     this.state = "pending"
     
+    // mocks the promise to request catalog information
     let promiseA = new Promise((resolve, reject) => {
-      let wait = setTimeout(()=>{
-        clearTimeout(wait)
-        resolve(data)
-      }, 3000)
+      resolve(data)
+      // let wait = setTimeout(()=>{
+      //   clearTimeout(wait)
+      //   resolve(data)
+      // }, 1000)
     })
 
     promiseA
