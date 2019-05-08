@@ -2,7 +2,6 @@ import React, {Fragment} from 'react'
 
 const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}) => {
   let input
-  console.log("PROP: ", property)
   if (!property || !property.name) {
     return null
   }

@@ -21,8 +21,14 @@ export async function addActiveDataSeries(store, seriesInfo) {
   if (!seriesInfo.plotlyData) {
     let url = `${seriesInfo.serviceUrl}/api/${seriesInfo.property.key}`
     if (seriesInfo.propertyInput) {
-      //TODO sanitize input
-      url += `?${seriesInfo.attribute}=${seriesInfo.propertyInput}`
+      let keys = Object.keys(seriesInfo.propertyInput)
+      keys.forEach((key, i) => {
+        if(i===0){
+          url += `?${key}=${seriesInfo.propertyInput[key]}`
+        } else {
+          url += `&${key}=${seriesInfo.propertyInput[key]}`
+        }
+      })
     }
 
     console.log("Requesting data from: ", url)
