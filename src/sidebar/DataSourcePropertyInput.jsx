@@ -6,14 +6,6 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
     return null
   }
 
-  const sortOptions = (options) => {
-    //chart duration options are already in order
-    if(property.name === "chart duration"){
-      return options
-    }
-    return options.sort()
-  }
-
   switch (property.type) {
     case 'select-map':
       input = <select
@@ -22,7 +14,7 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
         name={`${serviceName}-prop-select`}
         value={currentValue}>
         {
-          sortOptions(Object.keys(property.values))
+          Object.keys(property.values)
           .map(key => {
           return (
             <option key={key} value={key}>
