@@ -246,7 +246,7 @@ export const data = [
     },
     {
         "id": "nrel",
-        meta: {
+        "meta": {
             "server": {
                 "name": "NREL Api",
                 "apiVersion": "0.2",
