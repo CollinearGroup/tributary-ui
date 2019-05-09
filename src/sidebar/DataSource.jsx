@@ -4,7 +4,6 @@ import { observable, action, decorate } from 'mobx';
 import defaultDataSourceLogo from '../assets/tributary-avatar.svg';
 import cx from 'classnames';
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
-import isEmpty from 'lodash.isempty';
 import DataSourcePropertyInput from './DataSourcePropertyInput';
 
 class DataSource extends Component {

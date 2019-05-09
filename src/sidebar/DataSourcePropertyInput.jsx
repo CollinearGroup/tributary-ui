@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react'
+import _ from 'lodash'
 
 const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}) => {
   let input
@@ -81,7 +82,7 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
         name={`${serviceName}-prop-select`}
         value={currentValue}>
         {
-          obtainSortedOptions(property.values)
+          obtainSortedOptions(_.cloneDeep(property.values))
         }
       </select>
       break;
