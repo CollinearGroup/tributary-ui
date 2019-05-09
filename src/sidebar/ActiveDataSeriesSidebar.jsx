@@ -22,9 +22,9 @@ class ActiveDataSeriesSidebar extends Component {
 
     let { series } = this.props
     let propertyInputString = ''
-    Object.values(series.propertyInput).forEach((value, i)=>{
-      propertyInputString += ` - ${value}`
-    })
+    for(let key in series.propertyInput){
+      propertyInputString += ` - ${series.propertyInput[key]}`
+    }
 
     return (
       <div className='active-data-series' >
