@@ -6,6 +6,7 @@ import { observer, inject } from 'mobx-react'
 import { observable, decorate, action } from 'mobx'
 import cx from 'classnames'
 import Analysis from './Analysis';
+import Loader from 'react-loader-spinner'
 
 class Sidebar extends Component {
   // @observable
@@ -18,12 +19,18 @@ class Sidebar extends Component {
   }
 
   render() {
-    let { dataSources } = this.props.catalogStore
+    let { dataSources, state, fetchCatalogSources } = this.props.catalogStore
+
+    //initialize or update CatalogSources
+    if (state === "pending") {
+      fetchCatalogSources()
+    }
+
     return <div>
       {this.props.appStateStore.contentState === 'addDataSource' ?
 
         <AddDataSource
-        handleAddDataSourceClick={this.handleAddDataSourceClick}
+          handleAddDataSourceClick={this.handleAddDataSourceClick}
         />
         :
         <div className='sidebar-container'>
@@ -59,6 +66,15 @@ class Sidebar extends Component {
                     <input className="data-source-search-input" type="search" placeholder="Search" />
                   </div>
                   <div className="data-source-cards-container">
+                    {(state === 'pending') &&
+                      <div className='loading-data-series-spinner-container'>
+                        <Loader
+                          type="Oval"
+                          color="#fff"
+                          height="40"
+                          width="40"
+                        />
+                      </div>}
                     {dataSources.map(source => {
                       return <DataSource key={source.id} source={source} />
                     })}

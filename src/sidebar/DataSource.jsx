@@ -4,7 +4,6 @@ import { observable, action, decorate } from 'mobx';
 import defaultDataSourceLogo from '../assets/tributary-avatar.svg';
 import cx from 'classnames';
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
-import isEmpty from 'lodash.isempty';
 import DataSourcePropertyInput from './DataSourcePropertyInput';
 
 class DataSource extends Component {
@@ -14,7 +13,7 @@ class DataSource extends Component {
     expanded: !(this.props.collapsible === undefined || this.props.collapsible) || false,
     selectedSeries: [],
     selectedCheckboxes: [],
-    propertyInput: '',
+    propertyInput: {},
     errorMessage: '',
   }
 
@@ -26,7 +25,7 @@ class DataSource extends Component {
         sourceId: this.props.source.id,
         sourceName: this.props.source.meta.server.name,
         serviceUrl: this.props.source.serviceUrl,
-        propertyInput: this.componentState.propertyInput,
+        propertyInput: {...this.componentState.propertyInput},
         property: {
           key: selectedProperty,
           name: this.props.source.meta.availableDataSeries[selectedProperty].name
@@ -35,12 +34,14 @@ class DataSource extends Component {
 
       plotData.name = `${plotData.sourceName} - ${plotData.property.name}`
       if (plotData.propertyInput) {
-        plotData.name += ` - ${plotData.propertyInput}`
+        for(let key in plotData.propertyInput){
+          plotData.name += ` - ${plotData.propertyInput[key]}`
+        }
       }
 
       //Add the attribute
       if (this.props.source.meta.availableDataSeries[selectedProperty].attributes) {
-        plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)[0]
+        plotData.attribute = Object.keys(this.props.source.meta.availableDataSeries[selectedProperty].attributes)
       }
 
       //Look in the store for a duplicate name and prevent it from adding
@@ -61,7 +62,7 @@ class DataSource extends Component {
         console.error("datasource err", err)
       }
     })
-    this.componentState.propertyInput = ''
+    //does not clear this.componentState.propertyInput because the state does not clear on UI
     this.componentState.selectedSeries = []
   }
 
@@ -81,7 +82,9 @@ class DataSource extends Component {
   }
 
   handlePropertyInputChange = (e) => {
-    this.componentState.propertyInput = e.target.value
+    //the name of the input is formatted as property-input-type
+    let property = e.target.name.split('-')[0]
+    this.componentState.propertyInput[property] = e.target.value
   }
 
   toggleExpanded = () => {
@@ -92,11 +95,13 @@ class DataSource extends Component {
   }
 
   determineDataSeriesInput = (dataSeriesProps) => {
-    let input = dataSeriesProps ? dataSeriesProps[Object.keys(dataSeriesProps)[0]] : {}
-    if (!isEmpty(dataSeriesProps)
-      && dataSeriesProps.location
-      && dataSeriesProps.location.selectionList) {
-      input = dataSeriesProps.location.selectionList
+    let input = dataSeriesProps ? [] : [{}]
+    for(var key in dataSeriesProps){
+      let copy = {
+        ...dataSeriesProps[key],
+        attribute: key
+      }
+      input.push(copy)
     }
     return input
   }
@@ -143,7 +148,11 @@ class DataSource extends Component {
         })}>
           <div className="collapsible-content-inner">
 
-            <DataSourcePropertyInput property={dataSeriesInput} onChange={this.handlePropertyInputChange} />
+          {
+            dataSeriesInput.map((input, i) => {
+              return <DataSourcePropertyInput key={i} property={input} serviceName={input.attribute} onChange={this.handlePropertyInputChange} />
+            })
+          }
 
             <div className="checkbox-group">
 

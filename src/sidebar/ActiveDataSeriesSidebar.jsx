@@ -21,6 +21,11 @@ class ActiveDataSeriesSidebar extends Component {
   render() {
 
     let { series } = this.props
+    let propertyInputString = ''
+    for(let key in series.propertyInput){
+      propertyInputString += ` - ${series.propertyInput[key]}`
+    }
+
     return (
       <div className='active-data-series' >
         <div className='active-data-series-marker'>
@@ -38,7 +43,7 @@ class ActiveDataSeriesSidebar extends Component {
               style={this.getBackgroundColor()}
             />
           }
-          <p>{series.property.name} {series.propertyInput}</p>
+          <p>{series.property.name} {propertyInputString}</p>
         </div>
 
         <i
