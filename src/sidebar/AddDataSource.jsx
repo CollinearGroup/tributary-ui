@@ -34,9 +34,8 @@ class AddDataSource extends Component {
       return
     }
     let { data } = response
-    let source = { id: Date.now(), meta: { ...data }, serviceUrl: this.componentState.urlInput }
-    console.log("Setting service data to ", source)
-    this.componentState.serviceData = source
+    console.log("Setting service data to ", data)
+    this.componentState.serviceData = data
   }
 
   handlePublish = () => {
