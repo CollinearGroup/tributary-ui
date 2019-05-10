@@ -273,7 +273,7 @@ export const data = [
                 "apiVersion": "0.2",
                 "baseURL": "https://api.iextrading.com/1.0/stock/",
                 "attribution": {
-                    "logo": "http://localhost:3000/logo.png",
+                    "logo": "http://tributary.collineargroup.com:3011/logo.png",
                     "link": "https://iextrading.com/developer/docs/#getting-started"
                 }
             },
