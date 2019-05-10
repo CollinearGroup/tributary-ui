@@ -1,7 +1,8 @@
-import { observable, action, decorate } from 'mobx';
+import {action, decorate, observable} from 'mobx';
+import axios from 'axios';
+//TODO: remove this when publish functionality complete
+import {data} from './mockDataSources';
 
-//TODO: remove this
-import { data } from './mockDataSources';
 class CatalogStore {
   // @observable
   dataSources = []
@@ -13,13 +14,25 @@ class CatalogStore {
   activePage = 'main'
 
   // @action
-  fetchCatalogSources = () => {
+  fetchCatalogSources = async () => {
     this.dataSources = []
     this.state = "pending"
-    
+
+    //get catalog from server
+    let catalog
+    try {
+      let res = await axios.get("http://tributary.collineargroup.com:3001/catalog")
+      catalog = res.data
+      console.log("successfully retrieved catalog data from server", catalog)
+    } catch (err) {
+      console.error("unable to load catalog data from server: ", err.stack)
+    }
+
     // mocks the promise to request catalog information
     let promiseA = new Promise((resolve, reject) => {
-      resolve(data)
+      //if catalog server is down use mock data
+      //TODO: update with publish functionality
+      resolve(catalog ? catalog : data)
       // let wait = setTimeout(()=>{
       //   clearTimeout(wait)
       //   resolve(data)
