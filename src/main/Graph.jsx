@@ -84,9 +84,23 @@ class Graph extends Component {
     }
 
     yAxisList.forEach((key,i)=>{
-      //leaving the baseline yaxis unchanged
-      if(i!==0){
+
+      let datumUsingYaxis = data.find(datum=>{
+        //Plotly data.yaxis layout looks like y, y2, y3, etc..., corresponding to plotly yaxis keys of yaxis, yaxis2, yaxis3 etc...
+        return (datum.yaxis===key.split('axis').join(''))
+      })
+
+      //baseline yaxis should not have overlaying, anchor, or position types set
+      if(i===0){
         this.plotState.layout[key]={
+          title: (datumUsingYaxis && datumUsingYaxis.units) ? datumUsingYaxis.units : key,
+          zerolinecolor: '#898e91',
+          gridcolor: '#898e91',
+          type: 'linear'
+        }
+      } else {
+        this.plotState.layout[key]={
+          title: (datumUsingYaxis && datumUsingYaxis.units) ? datumUsingYaxis.units : key,
           zerolinecolor: '#898e91',
           gridcolor: '#898e91',
           overlaying: 'y', 

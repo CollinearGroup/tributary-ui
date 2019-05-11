@@ -57,11 +57,17 @@ export async function addActiveDataSeries(store, seriesInfo) {
       let filteredDataSeries = store.activeDataSeries.filter(it => it.id !== seriesInfo.id)
       let nextDataSeries = [...filteredDataSeries, seriesInfo]
       
+      //sets data to yaxis based on unitType
       let unitTypes = {}
       let count = 1 
       nextDataSeries.forEach((series)=>{
         if(!unitTypes[series.plotlyData.units]){
-          unitTypes[series.plotlyData.units]=`y${count}`
+          //y1 defaults to y, must keep consistent to match units later
+          if(count===1){
+            unitTypes[series.plotlyData.units]="y"
+          } else {
+            unitTypes[series.plotlyData.units]=`y${count}`
+          }
         }
         series.plotlyData.yaxis=unitTypes[series.plotlyData.units]
         count++
