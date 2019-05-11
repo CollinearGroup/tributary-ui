@@ -40,7 +40,8 @@ class Graph extends Component {
         //     {step: 'all'}
         //   ]},
         //rangeslider: {}, //comment out rangeslider to enable scaling on y axis
-        type: 'date'
+        type: 'date',
+        domain: [0,1]
       },
       yaxis: { //default (no units)
         zerolinecolor: '#898e91',
@@ -75,6 +76,12 @@ class Graph extends Component {
     })
 
     let yAxisList = Object.keys(this.plotState.layout).filter(key=>key.includes('yaxis'))
+
+    // to make room for multiple y axis, must shift xaxis domain
+    if(yAxisList.length>1){
+      let shift = 0.1*(yAxisList.length-1)+0.1
+      this.plotState.layout.xaxis.domain=[shift,1]
+    }
 
     yAxisList.forEach((key,i)=>{
       //leaving the baseline yaxis unchanged
