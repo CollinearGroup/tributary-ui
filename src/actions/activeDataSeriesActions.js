@@ -55,8 +55,18 @@ export async function addActiveDataSeries(store, seriesInfo) {
 
     if (currentSeriesInStore.length) {
       let filteredDataSeries = store.activeDataSeries.filter(it => it.id !== seriesInfo.id)
-
       let nextDataSeries = [...filteredDataSeries, seriesInfo]
+      
+      let unitTypes = {}
+      let count = 1 
+      nextDataSeries.forEach((series)=>{
+        if(!unitTypes[series.plotlyData.units]){
+          unitTypes[series.plotlyData.units]=`y${count}`
+        }
+        series.plotlyData.yaxis=unitTypes[series.plotlyData.units]
+        count++
+      })
+
       store.setActiveDataSeries(nextDataSeries)
     } else {
       console.warn("Request finished, but series not found in store")

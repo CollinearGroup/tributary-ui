@@ -52,49 +52,22 @@ class Graph extends Component {
     config: { responsive: true }
   }
 
-  getUnitTypesMap = (data) => {
-    if(!data || !data.length){
-      return {}
-    }
-    let unitTypes = {}
-    let count = 1
-    data.forEach((datum)=>{
-      if(!unitTypes[datum.units] && unitTypes[datum.units]!==0){
-        unitTypes[datum.units]=`${count}`
-      }
-      count++
-    })
-    return unitTypes
-  }
+  handleGraphUpdate = (nextPlotState) => {
+    console.log('updating', nextPlotState)
 
-  updateYAxis = (updatedLayout, unitTypes) => {
-    Object.keys(unitTypes).forEach(key=>{
-      updatedLayout[`yaxis${unitTypes[key]}`] = {
-        title: key,
-        titlefont: {color: 'white'}, 
+    let yAxisList = Object.keys(nextPlotState.layout).filter(key=>key.includes('yaxis'))
+
+    yAxisList.forEach((key,i)=>{
+      nextPlotState.layout[key]={
         zerolinecolor: '#898e91',
         gridcolor: '#898e91',
         overlaying: 'y', 
         type: 'linear',
         side: 'left',
         anchor: 'free',
-        position: 0.1*unitTypes[key]
+        position: 0.1*i
       }
     })
-    return updatedLayout
-  }
-
-  addYAxisToData(data, unitTypesMap){
-    let updatedData = data.map(datum => {
-      let yAxisString = (`y${unitTypesMap[datum.units]}`)
-      datum.yaxis = yAxisString
-      return datum
-    })
-    return updatedData
-  }
-
-  handleGraphUpdate = (nextPlotState) => {
-    console.log('updating')
     
     // this.plotState = nextPlotState
     this.plotState.layout = nextPlotState.layout
@@ -115,13 +88,20 @@ class Graph extends Component {
       return series.plotlyData
     })
 
-    let unitTypesMap = this.getUnitTypesMap(data)
-    console.log("Unit Types: ", unitTypesMap)
-    // let updatedLayout = this.updateYAxis(this.plotState.layout, unitTypesMap)
-    // let adjustedData = this.addYAxisToData(_.cloneDeep(data), unitTypesMap)
-    
-    // console.log("adjusted Data", adjustedData)
-    // console.log("Layout: ", this.plotState.layout)
+    // {
+    //   title: key,
+    //   titlefont: {color: 'white'}, 
+    //   zerolinecolor: '#898e91',
+    //   gridcolor: '#898e91',
+    //   overlaying: 'y', 
+    //   type: 'linear',
+    //   side: 'left',
+    //   anchor: 'free',
+    //   position: 0.1*unitTypes[key]
+    // }
+
+    console.log('data: ', data)
+    console.log(this.plotState.layout)
 
     return (
       <div className='graph-container'>
