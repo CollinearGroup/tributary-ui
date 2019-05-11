@@ -53,21 +53,26 @@ class Graph extends Component {
   }
 
   handleGraphUpdate = (nextPlotState) => {
-    console.log('updating', nextPlotState)
+    console.log('updating')
 
     let yAxisList = Object.keys(nextPlotState.layout).filter(key=>key.includes('yaxis'))
 
     yAxisList.forEach((key,i)=>{
-      nextPlotState.layout[key]={
-        zerolinecolor: '#898e91',
-        gridcolor: '#898e91',
-        overlaying: 'y', 
-        type: 'linear',
-        side: 'left',
-        anchor: 'free',
-        position: 0.1*i
+      //leaving the baseline yaxis unchanged
+      if(i!==0){
+        nextPlotState.layout[key]={
+          zerolinecolor: '#898e91',
+          gridcolor: '#898e91',
+          overlaying: 'y', 
+          type: 'linear',
+          side: 'right',
+          anchor: 'free',
+          position: 0.1*i
+        }
       }
     })
+
+    console.log('setting Layout to', nextPlotState.layout)
     
     // this.plotState = nextPlotState
     this.plotState.layout = nextPlotState.layout
@@ -100,8 +105,8 @@ class Graph extends Component {
     //   position: 0.1*unitTypes[key]
     // }
 
-    console.log('data: ', data)
-    console.log(this.plotState.layout)
+    console.log('rendering data: ', data)
+    console.log('rendering layout: ',this.plotState.layout)
 
     return (
       <div className='graph-container'>
