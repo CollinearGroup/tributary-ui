@@ -5,6 +5,7 @@ import './Graph.css'
 import graphColors from '../assets/graphColors'
 import { observable, decorate, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
+import _ from 'lodash'
 
 class Graph extends Component {
   // @observable
@@ -38,10 +39,10 @@ class Graph extends Component {
         //     },
         //     {step: 'all'}
         //   ]},
-        rangeslider: {},
+        //rangeslider: {}, //comment out rangeslider to enable scaling on y axis
         type: 'date'
       },
-      yaxis: {
+      yaxis: { //default (no units)
         zerolinecolor: '#898e91',
         gridcolor: '#898e91',
         type: 'linear'
@@ -51,16 +52,62 @@ class Graph extends Component {
     config: { responsive: true }
   }
 
+  getUnitTypesMap = (data) => {
+    if(!data || !data.length){
+      return {}
+    }
+    let unitTypes = {}
+    let count = 1
+    data.forEach((datum)=>{
+      if(!unitTypes[datum.units] && unitTypes[datum.units]!==0){
+        unitTypes[datum.units]=`${count}`
+      }
+      count++
+    })
+    return unitTypes
+  }
+
+  updateYAxis = (updatedLayout, unitTypes) => {
+    Object.keys(unitTypes).forEach(key=>{
+      updatedLayout[`yaxis${unitTypes[key]}`] = {
+        title: key,
+        titlefont: {color: 'white'}, 
+        zerolinecolor: '#898e91',
+        gridcolor: '#898e91',
+        overlaying: 'y', 
+        type: 'linear',
+        side: 'left',
+        anchor: 'free',
+        position: 0.1*unitTypes[key]
+      }
+    })
+    return updatedLayout
+  }
+
+  addYAxisToData(data, unitTypesMap){
+    let updatedData = data.map(datum => {
+      let yAxisString = (`y${unitTypesMap[datum.units]}`)
+      datum.yaxis = yAxisString
+      return datum
+    })
+    return updatedData
+  }
+
   handleGraphUpdate = (nextPlotState) => {
+    console.log('updating')
+    
     // this.plotState = nextPlotState
     this.plotState.layout = nextPlotState.layout
     this.plotState.config = nextPlotState.config
     this.plotState.frames = nextPlotState.frames
   }
 
+  determineYAxisUnits = () => {
+    return null
+  }
+
   render() {
     let { activeDataSeries } = this.props.activeDataSeriesStore
-    // console.log("ACTIVE SERIES: ", JSON.stringify(activeDataSeries))
 
     let data = activeDataSeries.filter(series => {
       return series.plotlyData
@@ -68,7 +115,13 @@ class Graph extends Component {
       return series.plotlyData
     })
 
-    // console.log("DATA: ", JSON.stringify(data))
+    let unitTypesMap = this.getUnitTypesMap(data)
+    console.log("Unit Types: ", unitTypesMap)
+    // let updatedLayout = this.updateYAxis(this.plotState.layout, unitTypesMap)
+    // let adjustedData = this.addYAxisToData(_.cloneDeep(data), unitTypesMap)
+    
+    // console.log("adjusted Data", adjustedData)
+    // console.log("Layout: ", this.plotState.layout)
 
     return (
       <div className='graph-container'>

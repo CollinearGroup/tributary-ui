@@ -44,6 +44,7 @@ export async function addActiveDataSeries(store, seriesInfo) {
       text : seriesData.initialDataSet[0][2] ? seriesData.initialDataSet.map(v => v[2]) :'',
       // seriesId: seriesInfo.id
       // marker: { color: 'purple' },
+      units : (seriesData.units && seriesData.units.name) ? seriesData.units.name : ''
     }
 
     //Update the store and remove the 'inFlight' flag for this data
