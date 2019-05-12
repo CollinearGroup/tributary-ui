@@ -75,7 +75,16 @@ class Graph extends Component {
       return series.plotlyData
     })
 
-    let yAxisList = Object.keys(this.plotState.layout).filter(key=>key.includes('yaxis'))
+    let yAxisMap = {}
+    data.forEach(datum=>{
+      if(!yAxisMap[datum.yaxis]){
+        yAxisMap[datum.yaxis] = datum.units || datum.yaxis
+      }
+    })
+
+    console.log('map', yAxisMap)
+
+    let yAxisList = Object.keys(yAxisMap)
 
     // to make room for multiple y axis, must shift xaxis domain
     if(yAxisList.length>1){
@@ -83,24 +92,24 @@ class Graph extends Component {
       this.plotState.layout.xaxis.domain=[shift,1]
     }
 
+    console.log('yAxisList.length: ', yAxisList)
+
     yAxisList.forEach((key,i)=>{
 
-      let datumUsingYaxis = data.find(datum=>{
-        //Plotly data.yaxis layout looks like y, y2, y3, etc..., corresponding to plotly yaxis keys of yaxis, yaxis2, yaxis3 etc...
-        return (datum.yaxis===key.split('axis').join(''))
-      })
+      //Plotly data.yaxis layout looks like y, y2, y3, etc..., corresponding to plotly yaxis keys of yaxis, yaxis2, yaxis3 etc...
+      let layoutYAxis = `yaxis${key.slice(1)}`
 
       //baseline yaxis should not have overlaying, anchor, or position types set
       if(i===0){
-        this.plotState.layout[key]={
-          title: (datumUsingYaxis && datumUsingYaxis.units) ? datumUsingYaxis.units : key,
+        this.plotState.layout[layoutYAxis]={
+          title: yAxisMap[key],
           zerolinecolor: '#898e91',
           gridcolor: '#898e91',
           type: 'linear'
         }
       } else {
-        this.plotState.layout[key]={
-          title: (datumUsingYaxis && datumUsingYaxis.units) ? datumUsingYaxis.units : key,
+        this.plotState.layout[layoutYAxis]={
+          title: yAxisMap[key],
           zerolinecolor: '#898e91',
           gridcolor: '#898e91',
           overlaying: 'y', 
