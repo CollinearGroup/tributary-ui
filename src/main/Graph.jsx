@@ -41,7 +41,7 @@ class Graph extends Component {
         //   ]},
         //rangeslider: {}, //comment out rangeslider to enable scaling on y axis
         type: 'date',
-        domain: [0,1]
+        domain: [0.1,1]
       },
       yaxis: { //default (no units)
         zerolinecolor: '#898e91',
@@ -82,17 +82,13 @@ class Graph extends Component {
       }
     })
 
-    console.log('map', yAxisMap)
-
     let yAxisList = Object.keys(yAxisMap)
 
     // to make room for multiple y axis, must shift xaxis domain
-    if(yAxisList.length>1){
+    if(yAxisList.length){
       let shift = 0.1*(yAxisList.length-1)+0.1
       this.plotState.layout.xaxis.domain=[shift,1]
     }
-
-    console.log('yAxisList.length: ', yAxisList)
 
     yAxisList.forEach((key,i)=>{
 
@@ -131,9 +127,6 @@ class Graph extends Component {
     //   anchor: 'free',
     //   position: 0.1*unitTypes[key]
     // }
-
-    console.log('rendering data: ', data)
-    console.log('rendering layout: ', this.plotState.layout)
 
     return (
       <div className='graph-container'>
