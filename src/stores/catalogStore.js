@@ -28,15 +28,11 @@ class CatalogStore {
       console.error("unable to load catalog data from server: ", err.stack)
     }
 
-    // mocks the promise to request catalog information
+    //request catalog information
     let promiseA = new Promise((resolve, reject) => {
       //if catalog server is down use mock data
       //TODO: update with publish functionality
       resolve(catalog ? catalog : data)
-      // let wait = setTimeout(()=>{
-      //   clearTimeout(wait)
-      //   resolve(data)
-      // }, 1000)
     })
 
     promiseA

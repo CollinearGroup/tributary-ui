@@ -53,44 +53,6 @@ export const data = [
         "serviceUrl": "http://tributary.collineargroup.com:3003",
         "status": {}
     },
-    {
-        "id": "wuwx",
-        "meta": {
-            "server": {
-                "name": "Weather Underground",
-                "apiVersion": "0.2",
-                "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3004/logo.jpg",
-                    "link": "http://www.wunderground.com"
-                },
-                "description": "10 day weather forecast from Weather Underground."
-            },
-            "availableDataSeries": {
-                "temperature": {
-                    "name": "Temperature",
-                    "description": "Provides temperature forecast for provided location.",
-                    "attributes": {
-                        "location": {
-                            "name": "Location",
-                            "description": "Zipcode or City, State"
-                        }
-                    }
-                },
-                "humidity": {
-                    "name": "Humidity",
-                    "description": "Provides humidity forecast for provided location.",
-                    "attributes": {
-                        "location": {
-                            "name": "Location",
-                            "description": "Zipcode or City, State"
-                        }
-                    }
-                }
-            }
-        },
-        "serviceUrl": "http://tributary.collineargroup.com:3004",
-        "status": {}
-    },
     // {
     //     "id": "SidewalkCafe",
     //     "meta": {
