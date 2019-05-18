@@ -14,6 +14,22 @@ class Sidebar extends Component {
 
   handleTabClick = e => { this.activeTabId = e.target.id }
 
+  searchChange = e => {
+    let filterVal = e.target.value
+    if(filterVal.length > 0) {
+      this.props.appStateStore.setFilter(filterVal)
+    } else {
+      this.props.appStateStore.setFilter(undefined)
+    }
+  }
+
+  searchOnLoad = e => {
+    if(this.props.appStateStore && this.props.appStateStore.filterValue && !e.target.value) {
+      console.log("Setting search!")
+      e.target.value = this.props.appStateStore.filterValue
+    }
+  }
+
   handleAddDataSourceClick = (e) => {
     this.props.appStateStore.pushState('addDataSource')
   }
@@ -24,6 +40,11 @@ class Sidebar extends Component {
     //initialize or update CatalogSources
     if (state === "pending") {
       fetchCatalogSources()
+    }
+
+    let filterValue = ''
+    if(this.props.appStateStore && this.props.appStateStore.filterValue) {
+      filterValue = this.props.appStateStore.filterValue
     }
 
     return <div>
@@ -59,11 +80,15 @@ class Sidebar extends Component {
             <div className='tab-content'>
               {this.activeTabId === "sidebar-tab-1" ?
                 (<div className='data-sources'>
-                  <div className="data-source-search">
+                  <div className="data-source-search" >
                     <i className="material-icons search-icon">
                       search
               </i>
-                    <input className="data-source-search-input" type="search" placeholder="Search" />
+                    <input className={filterValue.length > 2 ? 
+                      "data-source-search-input search-active" : 
+                      "data-source-search-input"} type="search" placeholder="Search" 
+                      value={filterValue}
+                      onChange={this.searchChange} onLoad={this.searchOnLoad}/>
                   </div>
                   <div className="data-source-cards-container">
                     {(state === 'pending') &&
@@ -76,7 +101,7 @@ class Sidebar extends Component {
                         />
                       </div>}
                     {dataSources.map(source => {
-                      return <DataSource key={source.id} source={source} />
+                      return <DataSource key={source.id} source={source} filterVal={filterValue} />
                     })}
                   </div>
                   <div className="add-data-source-container">

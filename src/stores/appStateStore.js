@@ -5,9 +5,17 @@ class AppStateStore {
   // @observable
   contentState 
 
+  // @observable
+  filterValue
+
   contentStateStack = []
 
+  // @action
+  setFilter(val) {
+    this.filterValue = val
+  }
 
+  // @action
   pushState(state){
     this.contentStateStack.push(this.contentState)
     this.contentState = state
@@ -21,7 +29,9 @@ class AppStateStore {
 decorate(AppStateStore, {
   contentState: observable,
   pushState: action,
-  popState: action
+  popState: action,
+  setFilter: action,
+  filterValue: observable
 })
 
 
