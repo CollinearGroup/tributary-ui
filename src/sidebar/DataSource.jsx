@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { observable, action, decorate } from 'mobx';
+import { observable, action, decorate, toJS } from 'mobx';
 import defaultDataSourceLogo from '../assets/tributary-avatar.svg';
 import cx from 'classnames';
 import ActiveDataSeriesSidebar from './ActiveDataSeriesSidebar';
@@ -94,6 +94,24 @@ class DataSource extends Component {
     this.componentState.expanded = !this.componentState.expanded
   }
 
+  /**
+   * Returns true if there is no filter or if this datasource meta data matches the specified filter
+   */
+  matchesFilter = (value, meta) => {
+    if(!value || value.length < 3) {
+      return true
+    }
+    let metaStr = JSON.stringify(meta)
+    try {
+      let regExp = RegExp(value, 'i')
+      let isMatch = metaStr.match(regExp)
+      return isMatch
+    } catch(err) {
+      console.error("Unable to execute search!", err)
+      return false
+    }
+  }
+
   determineDataSeriesInput = (dataSeriesProps) => {
     let input = dataSeriesProps ? [] : [{}]
     for(var key in dataSeriesProps){
@@ -122,6 +140,21 @@ class DataSource extends Component {
     })
     // console.log("PLOTSERIES: ", this.props.activeDataSeriesStore.activeDataSeries)
 
+    let filterOut = !this.matchesFilter(this.props.filterVal, toJS(meta))
+
+    if (filterOut) {
+      return (
+        <div className="card" disabled={true}>
+          <div className='card-collapse-toggle' style={{cursor: 'default'}}>
+            <div className="card-content" disabled={true}>
+              <div className="arrow-container" disabled={true}>
+                <h2 className="card-server-name-disabled" disabled={true}>{meta.server.name}</h2>
+              </div>
+            </div>   
+          </div>
+        </div>
+      )
+    }
 
     return (
       <div className="card">
