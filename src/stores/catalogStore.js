@@ -18,14 +18,20 @@ class CatalogStore {
     this.dataSources = []
     this.state = "pending"
 
-    //get catalog from server
-    let catalog
-    try {
-      let res = await axios.get("http://tributary.collineargroup.com:3001/catalog")
-      catalog = res.data
-      console.log("successfully retrieved catalog data from server", catalog)
-    } catch (err) {
-      console.error("unable to load catalog data from server: ", err.stack)
+    // Get catalog url from a config file.
+    let { data: config } = await axios.get("/app-config.json")
+
+    let catalog = config.defaultCatalog
+
+    // get catalog from server if no default
+    if (!catalog) {
+      try {
+        let res = await axios.get(config.catalog_url)
+        catalog = res.data
+        console.log("successfully retrieved catalog data from server", catalog)
+      } catch (err) {
+        console.error("unable to load catalog data from server: ", err.stack)
+      }
     }
 
     //request catalog information
