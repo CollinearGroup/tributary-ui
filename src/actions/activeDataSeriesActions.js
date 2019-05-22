@@ -44,6 +44,8 @@ export async function addActiveDataSeries(store, seriesInfo) {
       text : seriesData.initialDataSet[0][2] ? seriesData.initialDataSet.map(v => v[2]) :'',
       // seriesId: seriesInfo.id
       // marker: { color: 'purple' },
+      units : (seriesData.units && seriesData.units.name) ? seriesData.units.name : '',
+      yaxis: 'y' //default yaxis to y1, or y
     }
 
     //Update the store and remove the 'inFlight' flag for this data
@@ -54,7 +56,6 @@ export async function addActiveDataSeries(store, seriesInfo) {
 
     if (currentSeriesInStore.length) {
       let filteredDataSeries = store.activeDataSeries.filter(it => it.id !== seriesInfo.id)
-
       let nextDataSeries = [...filteredDataSeries, seriesInfo]
       store.setActiveDataSeries(nextDataSeries)
     } else {
@@ -67,5 +68,15 @@ export async function addActiveDataSeries(store, seriesInfo) {
 
 export function removeActiveSeries(store, id) {
   const nextDataSeries = store.activeDataSeries.filter(series => series.id !== id)
+  store.setActiveDataSeries(nextDataSeries)
+}
+
+export function updateYaxis(store, name, yaxis) {
+  const nextDataSeries = store.activeDataSeries.map(series => {
+    if(series.name===name){
+      series.plotlyData.yaxis = yaxis
+    } 
+    return series
+  })
   store.setActiveDataSeries(nextDataSeries)
 }

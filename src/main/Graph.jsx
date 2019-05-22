@@ -38,13 +38,33 @@ class Graph extends Component {
         //     },
         //     {step: 'all'}
         //   ]},
-        rangeslider: {},
-        type: 'date'
+        //rangeslider: {}, //comment out rangeslider to enable scaling on y axis
+        type: 'date',
+        domain: [0,1]
       },
-      yaxis: {
+      yaxis: { //default (no units)
+        title:'Y-Axis 1',
         zerolinecolor: '#898e91',
         gridcolor: '#898e91',
         type: 'linear'
+      },
+      yaxis2: { //default (no units)
+        title: 'Y-Axis 2',
+        zerolinecolor: '#898e91',
+        gridcolor: '#898e91',
+        type: 'linear',
+        overlaying: 'y',
+        anchor:'free',
+        position: 1,
+        side:'right'
+            //       title: yAxisMap[key],
+    //       zerolinecolor: '#898e91',
+    //       gridcolor: '#898e91',
+    //       overlaying: 'y', 
+    //       type: 'linear',
+    //       anchor: 'free',
+    //       position: 0.1*i
+
       }
     },
     frames: [],
@@ -52,6 +72,8 @@ class Graph extends Component {
   }
 
   handleGraphUpdate = (nextPlotState) => {
+    console.log('updating')
+
     // this.plotState = nextPlotState
     this.plotState.layout = nextPlotState.layout
     this.plotState.config = nextPlotState.config
@@ -60,21 +82,17 @@ class Graph extends Component {
 
   render() {
     let { activeDataSeries } = this.props.activeDataSeriesStore
-    // console.log("ACTIVE SERIES: ", JSON.stringify(activeDataSeries))
 
     let data = activeDataSeries.filter(series => {
-      return series.plotlyData
+      return (series.plotlyData)
     }).map(series => {
       return series.plotlyData
     })
-
-    // console.log("DATA: ", JSON.stringify(data))
 
     return (
       <div className='graph-container'>
         <Plot
           className='js-plotly-plot'
-          // data={this.plotState.data}
           data={data}
           layout={this.plotState.layout}
           config={this.plotState.config}
