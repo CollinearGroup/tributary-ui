@@ -171,6 +171,13 @@
   font-size: 1.6rem;
 }
 
+.card-server-name-disabled {
+  color: var(--light-grey-1);
+  font-family: 'Roboto Condensed';
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
 .card-server-description {
   color: var(--light-grey-1);
   font-size: 1.2rem;
@@ -272,9 +279,14 @@
   width: 95%;
   border-width: 0;
   background-color: transparent;
+  color: var(--light-grey-1);
   font-size: 1.4rem;
   height: 3.2rem;
   padding: 0 1rem;
+}
+
+.search-active {
+  color: var(--light)
 }
 
 .data-source-search-input::placeholder {

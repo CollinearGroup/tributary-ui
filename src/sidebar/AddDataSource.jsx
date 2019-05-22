@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DataSource from './DataSource';
 import { observer, inject } from 'mobx-react'
-import { observable, decorate, action } from 'mobx'
+import { observable, decorate, action} from 'mobx'
 // import cx from 'classnames'
 import axios from 'axios';
 
@@ -39,7 +39,7 @@ class AddDataSource extends Component {
   }
 
   handlePublish = () => {
-    this.props.catalogStore.addDataSource(this.componentState.serviceData)
+    this.props.catalogStore.addDataSource({meta: this.componentState.serviceData, serviceUrl: this.componentState.urlInput})
     this.props.appStateStore.popState()
   }
 
@@ -72,11 +72,14 @@ class AddDataSource extends Component {
           }
 
           {this.componentState.serviceData &&
+            <div>
             <DataSource
-              source={this.componentState.serviceData}
+              source={{meta: this.componentState.serviceData}}
               disablePlot
               collapsible={false}
-            />}
+            />
+            </div>
+          }
         </div>
 
         <div className='add-data-button-container'>
@@ -109,7 +112,9 @@ class AddDataSource extends Component {
 
 decorate(AddDataSource, {
   componentState: observable,
-  handleUrlInput: action
+  handleUrlInput: action,
+  handleSubmit: action,
+  handlePublish: action
 })
 
 
