@@ -72,9 +72,9 @@ export function removeActiveSeries(store, id) {
   store.setActiveDataSeries(nextDataSeries)
 }
 
-export function updateYaxis(store, id, yaxis) {
+export function updateYaxis(store, name, yaxis) {
   const nextDataSeries = store.activeDataSeries.map(series => {
-    if(series.id===id){
+    if(series.name===name){
       series.yaxis = yaxis
     } 
     return series
