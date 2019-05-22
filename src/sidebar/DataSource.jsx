@@ -126,6 +126,9 @@ class DataSource extends Component {
 
   render() {
     let { meta /*, serviceUrl, status */ } = this.props.source
+    if(!meta) {
+      return <div></div>
+    }
     let logo = meta.server.attribution.logo
 
     let dataSeriesProps = meta.availableDataSeries[Object.keys(meta.availableDataSeries)[0]].attributes

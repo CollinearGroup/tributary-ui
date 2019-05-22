@@ -80,7 +80,9 @@ const DataSourcePropertyInput = ({property, onChange, currentValue, serviceName}
         onChange={onChange}
         className="tbt-form-input"
         name={`${serviceName}-prop-select`}
+        defaultValue='default'
         value={currentValue}>
+          <option key="defaultValue" value="default" disabled>Select {property.name}</option>
         {
           obtainSortedOptions(_.cloneDeep(property.values))
         }
