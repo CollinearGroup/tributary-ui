@@ -57,7 +57,6 @@ export async function addActiveDataSeries(store, seriesInfo) {
     if (currentSeriesInStore.length) {
       let filteredDataSeries = store.activeDataSeries.filter(it => it.id !== seriesInfo.id)
       let nextDataSeries = [...filteredDataSeries, seriesInfo]
-
       store.setActiveDataSeries(nextDataSeries)
     } else {
       console.warn("Request finished, but series not found in store")

@@ -5,13 +5,8 @@ import './Graph.css'
 import graphColors from '../assets/graphColors'
 import { observable, decorate, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
-import _ from 'lodash'
 
 class Graph extends Component {
-  state = {
-    inView: {},
-    maxUnitError: false
-  }
   // @observable
   plotState = {
     layout: {
@@ -112,11 +107,6 @@ class Graph extends Component {
             }))
           }}
         />
-          {
-            this.state.maxUnitError &&
-            <div className="data-source-request-error">Maximum Number of Units in View is 2</div>
-          }
-
       </div>
     )
   }
