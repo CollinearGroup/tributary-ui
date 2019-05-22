@@ -48,13 +48,13 @@ class Graph extends Component {
         domain: [0,1]
       },
       yaxis: { //default (no units)
-        title:'yAxis',
+        title:'Y-Axis 1',
         zerolinecolor: '#898e91',
         gridcolor: '#898e91',
         type: 'linear'
       },
       yaxis2: { //default (no units)
-        title: 'SEAN CHEVVVVV',
+        title: 'Y-Axis 2',
         zerolinecolor: '#898e91',
         gridcolor: '#898e91',
         type: 'linear',
@@ -85,47 +85,6 @@ class Graph extends Component {
     this.plotState.frames = nextPlotState.frames
   }
 
-  handleCheckboxClick = (unit) => {
-    let copy = _.cloneDeep(this.state.inView)
-    let keys = Object.keys(copy)
-    if(keys.includes(unit)){ //if already checked
-      delete copy[unit]
-      let remainingKey = Object.keys(copy)[0] //will be the remaining key or undefined
-      if(copy[remainingKey]==='y2'){ //if we deleted y1
-        copy[remainingKey]='y'
-      }
-      this.setState({
-        inView:copy,
-        maxUnitError:false
-      })
-      return
-    } else { //unchecked
-      if(keys.length>1){ //max units in view is 2
-        this.setState({
-          maxUnitError:true
-        })
-        return
-      } else { //can add the unit
-        if(keys.length===0){
-          copy[unit]='y'
-        } else {
-          copy[unit]=`y${keys.length+1}`
-        }
-        this.setState({
-          inView:copy,
-          maxUnitError:false
-        })
-      }
-    }
-
-    //maximum units in view is 2
-    if(Object.keys(this.state.inView).length>1)
-    copy.push(unit)
-    this.setState({
-      inView: copy
-    })
-  }
-
   render() {
     let { activeDataSeries } = this.props.activeDataSeriesStore
 
@@ -135,87 +94,11 @@ class Graph extends Component {
       return series.plotlyData
     })
 
-    //map all the units associated with the dataa
-    let unitsMap = {}
-    data.forEach(datum=>{
-      if(!unitsMap[datum.units]){
-        unitsMap[datum.units] = true
-      }
-    })
-
-    //filter down the data to what should be in view, and set new yaxis
-    let dataInView = data.filter(datum => {
-      return Object.keys(this.state.inView).includes(datum.units)
-    })
-
-    dataInView.forEach((datum)=>{
-      //set the data yaxis
-      datum.yaxis = this.state.inView[datum.units]
-      //set the yaxis title to the unit
-      //this.state.inView[unit] format looks like y, y2, y3, etc..., corresponding to plotly layout yaxis keys of yaxis, yaxis2, yaxis3 etc...
-      let layoutYAxis = `yaxis${this.state.inView[datum.units].slice(1)}`
-      console.log(layoutYAxis)
-      this.plotState.layout[layoutYAxis].title = datum.units
-    })
-
-    console.log(dataInView)
-    
-    // map((datum, i)=>{
-    //   datum.yaxis = `y${i+1}`
-    //   return datum
-    // })
-
-    // let yAxisList = Object.keys(yAxisMap)
-
-    // // to make room for multiple y axis, must shift xaxis domain
-    // if(yAxisList.length){
-    //   let shift = 0.1*(yAxisList.length-1)+0.1
-    //   this.plotState.layout.xaxis.domain=[shift,1]
-    // }
-
-    // yAxisList.forEach((key,i)=>{
-
-    //   //Plotly data.yaxis layout looks like y, y2, y3, etc..., corresponding to plotly yaxis keys of yaxis, yaxis2, yaxis3 etc...
-    //   let layoutYAxis = `yaxis${key.slice(1)}`
-
-    //   //baseline yaxis should not have overlaying, anchor, or position types set
-    //   if(i===0){
-    //     this.plotState.layout[layoutYAxis]={
-    //       title: yAxisMap[key],
-    //       zerolinecolor: '#898e91',
-    //       gridcolor: '#898e91',
-    //       type: 'linear'
-    //     }
-    //   } else {
-    //     this.plotState.layout[layoutYAxis]={
-    //       title: yAxisMap[key],
-    //       zerolinecolor: '#898e91',
-    //       gridcolor: '#898e91',
-    //       overlaying: 'y', 
-    //       type: 'linear',
-    //       anchor: 'free',
-    //       position: 0.1*i
-    //     }
-    //   }
-    // })
-
-    // {
-    //   title: key,
-    //   titlefont: {color: 'white'}, 
-    //   zerolinecolor: '#898e91',
-    //   gridcolor: '#898e91',
-    //   overlaying: 'y', 
-    //   type: 'linear',
-    //   side: 'left',
-    //   anchor: 'free',
-    //   position: 0.1*unitTypes[key]
-    // }
-
     return (
       <div className='graph-container'>
         <Plot
           className='js-plotly-plot'
-          data={dataInView}
+          data={data}
           layout={this.plotState.layout}
           config={this.plotState.config}
           onUpdate={this.handleGraphUpdate}
@@ -229,24 +112,6 @@ class Graph extends Component {
             }))
           }}
         />
-        <div className="checkbox-group">
-          <h3 className="tbt-form-label">In View</h3>
-          {Object.keys(unitsMap).map(unit => {
-            return (
-            <div key={unit}>
-              <label className="checkbox-label">{unit}
-                <input
-                  id={`input-${unit}`}
-                  className="checkbox"
-                  type="checkbox"
-                  checked={Object.keys(this.state.inView).includes(unit)}
-                  name={unit}
-                  onChange={()=>this.handleCheckboxClick(unit)}
-                />
-              </label>
-            </div>)
-          })}
-        </div>
           {
             this.state.maxUnitError &&
             <div className="data-source-request-error">Maximum Number of Units in View is 2</div>
