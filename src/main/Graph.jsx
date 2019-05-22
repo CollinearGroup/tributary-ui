@@ -91,11 +91,8 @@ class Graph extends Component {
     let data = activeDataSeries.filter(series => {
       return (series.plotlyData)
     }).map(series => {
-      console.log(series.plotlyData.yaxis)
       return series.plotlyData
     })
-
-    console.log(data, this.plotState.layout)
 
     return (
       <div className='graph-container'>

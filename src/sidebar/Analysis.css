@@ -36,6 +36,7 @@
 .yaxis-selection-container {
   color: #ffffff;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .yaxis-selection-header {
@@ -61,6 +62,10 @@
 .yaxis-selection-big-header {
   width: 70%;
   border-right: 1px solid grey;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
 }
 
 .yaxis-selection-small-header {

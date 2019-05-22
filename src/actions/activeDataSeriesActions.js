@@ -75,7 +75,7 @@ export function removeActiveSeries(store, id) {
 export function updateYaxis(store, name, yaxis) {
   const nextDataSeries = store.activeDataSeries.map(series => {
     if(series.name===name){
-      series.yaxis = yaxis
+      series.plotlyData.yaxis = yaxis
     } 
     return series
   })

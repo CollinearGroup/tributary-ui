@@ -7,10 +7,8 @@ import './Analysis.css'
 class Analysis extends Component {
 
   checkboxOnChange = (e) => {
-    console.log(e.target.name, e.target.value)
     this.props.actions.updateYaxis(this.props.activeDataSeriesStore, e.target.name, e.target.value)
   }
-
 
     render(){
       let { activeDataSeries } = this.props.activeDataSeriesStore
@@ -30,7 +28,7 @@ class Analysis extends Component {
                 type="radio" 
                 name={name} 
                 value="y"
-                defaultChecked 
+                defaultChecked={yaxis==="y"}
                 onChange={this.checkboxOnChange}  
                 />
             </div>
@@ -39,6 +37,7 @@ class Analysis extends Component {
                 type="radio" 
                 name={name} 
                 value="y2"
+                defaultChecked={yaxis==="y2"}
                 onChange={this.checkboxOnChange}
                 />
             </div>
