@@ -6,7 +6,7 @@ export const data = [
                 "name": "Fremont Bike Traffic",
                 "apiVersion": "0.2",
                 "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3007/logo.png",
+                    "logo": "http://tributary.collineargroup.com/fremontBikes/logo.png",
                     "link": "https://data.seattle.gov/"
                 },
                 "description": "Hourly bike count across Fremont Bridge from Seattle Open Data"
@@ -22,7 +22,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3007",
+        "serviceUrl": "http://tributary.collineargroup.com/fremontBikes",
         "status": {}
     },
     {
@@ -32,7 +32,7 @@ export const data = [
                 "name": "NOAA Server",
                 "apiVersion": "0.2",
                 "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3003/logo.jpg",
+                    "logo": "http://tributary.collineargroup.com/noaaWx/logo.jpg",
                     "link": "http://www.noaa.gov"
                 },
                 "description": "7 day weather forecast from NOAA."
@@ -50,7 +50,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3003",
+        "serviceUrl": "http://tributary.collineargroup.com/noaaWx",
         "status": {}
     },
     // {
@@ -203,7 +203,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3005",
+        "serviceUrl": "http://tributary.collineargroup.com/census",
         "status": {}
     },
     {
@@ -224,7 +224,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3009"
+        "serviceUrl": "http://tributary.collineargroup.com/nrel"
     },
     {
         "id": "stock-data",
@@ -294,7 +294,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3011",
+        "serviceUrl": "http://tributary.collineargroup.com/stockData",
         "status": {}
     }
 ]
