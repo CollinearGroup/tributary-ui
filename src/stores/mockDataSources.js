@@ -6,7 +6,7 @@ export const data = [
                 "name": "Fremont Bike Traffic",
                 "apiVersion": "0.2",
                 "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3007/logo.png",
+                    "logo": "https://tributary.collineargroup.com/fremontBikes/logo.png",
                     "link": "https://data.seattle.gov/"
                 },
                 "description": "Hourly bike count across Fremont Bridge from Seattle Open Data"
@@ -22,7 +22,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3007",
+        "serviceUrl": "https://tributary.collineargroup.com/fremontBikes",
         "status": {}
     },
     {
@@ -32,8 +32,8 @@ export const data = [
                 "name": "NOAA Server",
                 "apiVersion": "0.2",
                 "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3003/logo.jpg",
-                    "link": "http://www.noaa.gov"
+                    "logo": "https://tributary.collineargroup.com/noaaWx/logo.jpg",
+                    "link": "https://www.noaa.gov"
                 },
                 "description": "7 day weather forecast from NOAA."
             },
@@ -50,7 +50,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3003",
+        "serviceUrl": "https://tributary.collineargroup.com/noaaWx",
         "status": {}
     },
     // {
@@ -203,7 +203,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3005",
+        "serviceUrl": "https://tributary.collineargroup.com/census",
         "status": {}
     },
     {
@@ -214,7 +214,7 @@ export const data = [
                 "apiVersion": "0.2",
                 "description": "Solar photovoltaic array infromation from nrel.gov",
                 "attribution": {
-                    "link": "http://www.nrel.gov"
+                    "link": "https://www.nrel.gov"
                 }
             },
             "availableDataSeries": {
@@ -224,7 +224,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3009"
+        "serviceUrl": "https://tributary.collineargroup.com/nrel"
     },
     {
         "id": "stock-data",
@@ -235,7 +235,7 @@ export const data = [
                 "apiVersion": "0.2",
                 "baseURL": "https://api.iextrading.com/1.0/stock/",
                 "attribution": {
-                    "logo": "http://tributary.collineargroup.com:3011/logo.png",
+                    "logo": "https://tributary.collineargroup.com/stockData/logo.png",
                     "link": "https://iextrading.com/developer/docs/#getting-started"
                 }
             },
@@ -294,7 +294,7 @@ export const data = [
                 }
             }
         },
-        "serviceUrl": "http://tributary.collineargroup.com:3011",
+        "serviceUrl": "https://tributary.collineargroup.com/stockData",
         "status": {}
     }
 ]
